@@ -626,6 +626,11 @@
         const lessonDoc = await db.collection('courses').doc(courseId).collection('lessons').doc(lessonId).get();
         const lesson = lessonDoc.data();
 
+        // Set duration based on content type (seconds)
+        let durationSeconds = 30; // default for text
+        if (lesson.type === 'video') durationSeconds = 120; // 2 minutes minimum watch
+        if (lesson.type === 'pdf') durationSeconds = 60; // 1 minute for PDF
+
         let contentHtml = '';
         if (lesson.type === 'video') {
             const videoId = extractYouTubeId(lesson.content);
@@ -638,27 +643,57 @@
             contentHtml = `<div class="text-content">${lesson.content.replace(/\n/g, '<br>')}</div>`;
         }
 
-        // Create modal
+        // Create modal with progress bar and disabled button
         const modal = document.createElement('div');
         modal.className = 'lesson-modal';
         modal.innerHTML = `
             <div class="lesson-modal-content">
                 <div class="lesson-modal-header">
                     <h3>Lesson ${lesson.order}: ${lesson.title}</h3>
-                    <button class="modal-close" onclick="this.closest('.lesson-modal').remove()"><i class="fas fa-times"></i></button>
+                    <button class="modal-close" onclick="clearInterval(window._lessonTimer); this.closest('.lesson-modal').remove()"><i class="fas fa-times"></i></button>
                 </div>
                 <div class="lesson-modal-body">
                     ${contentHtml}
                     ${lesson.description ? `<p class="lesson-desc">${lesson.description}</p>` : ''}
                 </div>
                 <div class="lesson-modal-footer">
-                    <button class="el-btn" onclick="completeLesson('${courseId}', ${index}, '${userId}', ${totalLessons}); this.closest('.lesson-modal').remove();">
-                        <i class="fas fa-check"></i> പൂർത്തിയാക്കി - അടുത്തത്
+                    <div class="lesson-progress-wrapper">
+                        <div class="lesson-progress-bar">
+                            <div class="lesson-progress-fill" id="lessonProgressFill"></div>
+                        </div>
+                        <span class="lesson-progress-text" id="lessonProgressText">0%</span>
+                    </div>
+                    <button class="el-btn lesson-next-btn disabled" id="lessonNextBtn" disabled>
+                        <i class="fas fa-lock"></i> പൂർത്തിയാകുന്നതുവരെ കാത്തിരിക്കുക...
                     </button>
                 </div>
             </div>
         `;
         document.body.appendChild(modal);
+
+        // Start progress timer
+        let elapsed = 0;
+        const fill = document.getElementById('lessonProgressFill');
+        const text = document.getElementById('lessonProgressText');
+        const btn = document.getElementById('lessonNextBtn');
+
+        window._lessonTimer = setInterval(() => {
+            elapsed++;
+            const percent = Math.min(Math.round((elapsed / durationSeconds) * 100), 100);
+            fill.style.width = percent + '%';
+            text.textContent = percent + '%';
+
+            if (percent >= 100) {
+                clearInterval(window._lessonTimer);
+                btn.disabled = false;
+                btn.classList.remove('disabled');
+                btn.innerHTML = '<i class="fas fa-check"></i> പൂർത്തിയാക്കി - അടുത്തത്';
+                btn.onclick = function() {
+                    completeLesson(courseId, index, userId, totalLessons);
+                    modal.remove();
+                };
+            }
+        }, 1000);
     }
 
     // ============================================================

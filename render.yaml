@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: khadimul-islam-sabha-website
+    runtime: static
+    buildCommand: echo "No build needed"
+    staticPublishPath: .
+    envVars: []

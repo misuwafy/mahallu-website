@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Learning Portal | ഖാദിമുൽ ഇസ്ലാം സഭ BP അങ്ങാടി</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="elearning.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="el-header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="logo.jpg" alt="Logo" class="logo-img">
+                <div class="logo-text">
+                    <h1>ഖാദിമുൽ ഇസ്ലാം സഭ</h1>
+                    <span>E-Learning Portal</span>
+                </div>
+            </a>
+            <div class="header-right">
+                <span class="user-name" id="userName" style="display:none;"><i class="fas fa-user-circle"></i> <span id="userDisplayName"></span></span>
+                <a href="#" class="logout-btn" id="logoutBtn" style="display:none;"><i class="fas fa-sign-out-alt"></i> ലോഗൗട്ട്</a>
+                <a href="index.html" class="back-home"><i class="fas fa-home"></i> ഹോം</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="el-hero">
+        <div class="container">
+            <div class="el-hero-content">
+                <h2><i class="fas fa-laptop"></i> E-Learning Portal</h2>
+                <p>ഖാദിമുൽ ഇസ്ലാം സഭ BP അങ്ങാടി മഹല്ല് ഇ-ലേണിംഗ് പ്ലാറ്റ്ഫോം</p>
+                <p class="el-hero-sub">മഹല്ല് അംഗങ്ങൾക്കായി ഓൺലൈൻ പഠന പരിപാടികൾ</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Loading -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="spinner"></div>
+        <p>ലോഡ് ചെയ്യുന്നു...</p>
+    </div>
+
+    <!-- AUTH SECTION -->
+    <section class="el-main" id="authSection" style="display:none;">
+        <div class="container">
+            <div class="auth-wrapper">
+
+                <!-- Login Form -->
+                <div class="el-card" id="loginCard">
+                    <div class="el-card-header">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <h3>ലോഗിൻ</h3>
+                    </div>
+                    <div class="error-msg" id="loginError" style="display:none;"></div>
+                    <form id="loginForm" class="el-form">
+                        <div class="form-group">
+                            <label><i class="fas fa-envelope"></i> ഇമെയിൽ</label>
+                            <input type="email" id="loginEmail" placeholder="ഇമെയിൽ വിലാസം" required>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-lock"></i> പാസ്‌വേഡ്</label>
+                            <input type="password" id="loginPassword" placeholder="പാസ്‌വേഡ് നൽകുക" required>
+                        </div>
+                        <div class="form-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox"> ഓർത്തിരിക്കുക
+                            </label>
+                            <a href="#" class="forgot-link" id="forgotPassword">പാസ്‌വേഡ് മറന്നോ?</a>
+                        </div>
+                        <button type="submit" class="el-btn" id="loginBtn">
+                            <i class="fas fa-sign-in-alt"></i> ലോഗിൻ ചെയ്യുക
+                        </button>
+                        <p class="form-switch">
+                            അക്കൗണ്ട് ഇല്ലേ? <a href="#" id="showRegister">രജിസ്റ്റർ ചെയ്യുക</a>
+                        </p>
+                    </form>
+                </div>
+
+                <!-- Register Form -->
+                <div class="el-card hidden" id="registerCard">
+                    <div class="el-card-header">
+                        <i class="fas fa-user-plus"></i>
+                        <h3>രജിസ്റ്റർ ചെയ്യുക</h3>
+                    </div>
+                    <div class="error-msg" id="registerError" style="display:none;"></div>
+                    <form id="registerForm" class="el-form">
+                        <div class="form-group">
+                            <label><i class="fas fa-user"></i> പേര്</label>
+                            <input type="text" id="regName" placeholder="നിങ്ങളുടെ പേര്" required>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-phone"></i> ഫോൺ നമ്പർ</label>
+                            <input type="tel" id="regPhone" placeholder="ഫോൺ നമ്പർ" required>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-envelope"></i> ഇമെയിൽ</label>
+                            <input type="email" id="regEmail" placeholder="ഇമെയിൽ വിലാസം" required>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-home"></i> വീട്ടു നമ്പർ / വിലാസം</label>
+                            <input type="text" id="regAddress" placeholder="മഹല്ല് വീട്ടു നമ്പർ">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-lock"></i> പാസ്‌വേഡ്</label>
+                            <input type="password" id="regPassword" placeholder="പാസ്‌വേഡ് സൃഷ്ടിക്കുക (6+ അക്ഷരം)" required minlength="6">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-lock"></i> പാസ്‌വേഡ് സ്ഥിരീകരിക്കുക</label>
+                            <input type="password" id="regConfirm" placeholder="പാസ്‌വേഡ് വീണ്ടും നൽകുക" required>
+                        </div>
+                        <button type="submit" class="el-btn" id="registerBtn">
+                            <i class="fas fa-user-plus"></i> രജിസ്റ്റർ ചെയ്യുക
+                        </button>
+                        <p class="form-switch">
+                            ഇതിനകം അക്കൗണ്ട് ഉണ്ടോ? <a href="#" id="showLogin">ലോഗിൻ ചെയ്യുക</a>
+                        </p>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- DASHBOARD SECTION -->
+    <section class="el-main" id="dashboardSection" style="display:none;">
+        <div class="container">
+
+            <!-- Dashboard Stats -->
+            <div class="dash-stats">
+                <div class="dash-stat-item">
+                    <i class="fas fa-book-open"></i>
+                    <div>
+                        <span class="dash-stat-num" id="totalCourses">6</span>
+                        <span class="dash-stat-label">ആകെ കോഴ്സുകൾ</span>
+                    </div>
+                </div>
+                <div class="dash-stat-item progress-stat">
+                    <i class="fas fa-spinner"></i>
+                    <div>
+                        <span class="dash-stat-num" id="inProgressCount">0</span>
+                        <span class="dash-stat-label">പഠനം നടക്കുന്നു</span>
+                    </div>
+                </div>
+                <div class="dash-stat-item completed-stat">
+                    <i class="fas fa-check-circle"></i>
+                    <div>
+                        <span class="dash-stat-num" id="completedCount">0</span>
+                        <span class="dash-stat-label">പൂർത്തിയാക്കിയവ</span>
+                    </div>
+                </div>
+                <div class="dash-stat-item available-stat">
+                    <i class="fas fa-plus-circle"></i>
+                    <div>
+                        <span class="dash-stat-num" id="availableCount">6</span>
+                        <span class="dash-stat-label">ലഭ്യമായവ</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- In Progress Courses -->
+            <div class="dash-section" id="inProgressSection" style="display:none;">
+                <h3 class="dash-section-title">
+                    <i class="fas fa-spinner fa-pulse"></i> പഠനം നടക്കുന്ന കോഴ്സുകൾ
+                </h3>
+                <div class="courses-grid" id="inProgressGrid"></div>
+            </div>
+
+            <!-- Completed Courses -->
+            <div class="dash-section" id="completedSection" style="display:none;">
+                <h3 class="dash-section-title">
+                    <i class="fas fa-trophy"></i> പൂർത്തിയാക്കിയ കോഴ്സുകൾ
+                </h3>
+                <div class="courses-grid" id="completedGrid"></div>
+            </div>
+
+            <!-- Available Courses -->
+            <div class="dash-section">
+                <h3 class="dash-section-title">
+                    <i class="fas fa-plus-circle"></i> ലഭ്യമായ കോഴ്സുകൾ - ചേരുക
+                </h3>
+                <div class="courses-grid" id="availableGrid"></div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="el-footer">
+        <div class="container">
+            <p>&copy; 2024 ഖാദിമുൽ ഇസ്ലാം സഭ BP അങ്ങാടി | E-Learning Portal</p>
+            <p>സഹായത്തിന്: <a href="tel:+919074868241">9074868241</a> | <a href="mailto:kisbpa@gmail.com">kisbpa@gmail.com</a></p>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+    <script>
+    // ============================================================
+    // FIREBASE CONFIG - Replace with your own from Firebase Console
+    // ============================================================
+    const firebaseConfig = {
+        apiKey: "YOUR_API_KEY_HERE",
+        authDomain: "YOUR_PROJECT.firebaseapp.com",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_PROJECT.appspot.com",
+        messagingSenderId: "YOUR_SENDER_ID",
+        appId: "YOUR_APP_ID"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // ============================================================
+    // COURSE DATA
+    // ============================================================
+    const allCourses = {
+        quran: {
+            id: 'quran',
+            title: 'ഖുർആൻ പഠനം',
+            description: 'തജ്‌വീദ്, ഹിഫ്‌ള്, തഫ്‌സീർ',
+            duration: '12 ആഴ്ചകൾ',
+            totalClasses: 36,
+            icon: 'fas fa-book-quran'
+        },
+        fiqh: {
+            id: 'fiqh',
+            title: 'ഫിഖ്‌ഹ് & മസ്അലകൾ',
+            description: 'ശാഫിഈ ഫിഖ്‌ഹ്, ദൈനംദിന മസ്അലകൾ',
+            duration: '8 ആഴ്ചകൾ',
+            totalClasses: 24,
+            icon: 'fas fa-balance-scale'
+        },
+        arabic: {
+            id: 'arabic',
+            title: 'അറബിക് ഭാഷ',
+            description: 'അടിസ്ഥാന അറബിക്, സംഭാഷണം',
+            duration: '16 ആഴ്ചകൾ',
+            totalClasses: 48,
+            icon: 'fas fa-language'
+        },
+        hadith: {
+            id: 'hadith',
+            title: 'ഹദീസ് പഠനം',
+            description: 'റിയാളുസ്സ്വാലിഹീൻ, ബുഖാരി ശരീഫ്',
+            duration: '10 ആഴ്ചകൾ',
+            totalClasses: 30,
+            icon: 'fas fa-scroll'
+        },
+        history: {
+            id: 'history',
+            title: 'ഇസ്ലാമിക ചരിത്രം',
+            description: 'നബി ചരിത്രം, ഖുലഫാഉർറാശിദീൻ',
+            duration: '8 ആഴ്ചകൾ',
+            totalClasses: 24,
+            icon: 'fas fa-landmark'
+        },
+        kids: {
+            id: 'kids',
+            title: 'കുട്ടികൾക്കുള്ള കോഴ്സ്',
+            description: 'അക്ഷരം, ദുആകൾ, ചെറിയ സൂറത്തുകൾ',
+            duration: '6 ആഴ്ചകൾ',
+            totalClasses: 18,
+            icon: 'fas fa-child'
+        }
+    };
+
+    // ============================================================
+    // DOM ELEMENTS
+    // ============================================================
+    const loadingScreen = document.getElementById('loadingScreen');
+    const authSection = document.getElementById('authSection');
+    const dashboardSection = document.getElementById('dashboardSection');
+    const loginCard = document.getElementById('loginCard');
+    const registerCard = document.getElementById('registerCard');
+    const userNameEl = document.getElementById('userName');
+    const userDisplayName = document.getElementById('userDisplayName');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    // ============================================================
+    // AUTH STATE LISTENER
+    // ============================================================
+    auth.onAuthStateChanged(async (user) => {
+        loadingScreen.style.display = 'none';
+        if (user) {
+            // User is logged in
+            authSection.style.display = 'none';
+            dashboardSection.style.display = 'block';
+            userNameEl.style.display = 'inline-flex';
+            logoutBtn.style.display = 'inline-flex';
+
+            // Get user data from Firestore
+            const userDoc = await db.collection('users').doc(user.uid).get();
+            if (userDoc.exists) {
+                userDisplayName.textContent = userDoc.data().name;
+            } else {
+                userDisplayName.textContent = user.email;
+            }
+
+            // Load dashboard
+            loadDashboard(user.uid);
+        } else {
+            // User is logged out
+            authSection.style.display = 'block';
+            dashboardSection.style.display = 'none';
+            userNameEl.style.display = 'none';
+            logoutBtn.style.display = 'none';
+        }
+    });
+
+    // ============================================================
+    // LOGIN
+    // ============================================================
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+        const btn = document.getElementById('loginBtn');
+        const errorEl = document.getElementById('loginError');
+
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ലോഗിൻ ചെയ്യുന്നു...';
+        errorEl.style.display = 'none';
+
+        try {
+            await auth.signInWithEmailAndPassword(email, password);
+        } catch (error) {
+            errorEl.textContent = getErrorMessage(error.code);
+            errorEl.style.display = 'block';
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> ലോഗിൻ ചെയ്യുക';
+        }
+    });
+
+    // ============================================================
+    // REGISTER
+    // ============================================================
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = document.getElementById('regName').value;
+        const phone = document.getElementById('regPhone').value;
+        const email = document.getElementById('regEmail').value;
+        const address = document.getElementById('regAddress').value;
+        const password = document.getElementById('regPassword').value;
+        const confirm = document.getElementById('regConfirm').value;
+        const btn = document.getElementById('registerBtn');
+        const errorEl = document.getElementById('registerError');
+
+        errorEl.style.display = 'none';
+
+        if (password !== confirm) {
+            errorEl.textContent = 'പാസ്‌വേഡുകൾ പൊരുത്തപ്പെടുന്നില്ല!';
+            errorEl.style.display = 'block';
+            return;
+        }
+
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> രജിസ്റ്റർ ചെയ്യുന്നു...';
+
+        try {
+            const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+            // Save user data to Firestore
+            await db.collection('users').doc(userCredential.user.uid).set({
+                name: name,
+                phone: phone,
+                email: email,
+                address: address,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+        } catch (error) {
+            errorEl.textContent = getErrorMessage(error.code);
+            errorEl.style.display = 'block';
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-user-plus"></i> രജിസ്റ്റർ ചെയ്യുക';
+        }
+    });
+
+    // ============================================================
+    // LOGOUT
+    // ============================================================
+    logoutBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        auth.signOut();
+    });
+
+    // ============================================================
+    // FORGOT PASSWORD
+    // ============================================================
+    document.getElementById('forgotPassword').addEventListener('click', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        if (!email) {
+            alert('ദയവായി ഇമെയിൽ നൽകുക, എന്നിട്ട് "പാസ്‌വേഡ് മറന്നോ?" ക്ലിക്ക് ചെയ്യുക');
+            return;
+        }
+        try {
+            await auth.sendPasswordResetEmail(email);
+            alert('പാസ്‌വേഡ് റീസെറ്റ് ലിങ്ക് ഇമെയിലിലേക്ക് അയച്ചു!');
+        } catch (error) {
+            alert(getErrorMessage(error.code));
+        }
+    });
+
+    // ============================================================
+    // TOGGLE LOGIN / REGISTER
+    // ============================================================
+    document.getElementById('showRegister').addEventListener('click', (e) => {
+        e.preventDefault();
+        loginCard.classList.add('hidden');
+        registerCard.classList.remove('hidden');
+    });
+
+    document.getElementById('showLogin').addEventListener('click', (e) => {
+        e.preventDefault();
+        registerCard.classList.add('hidden');
+        loginCard.classList.remove('hidden');
+    });
+
+    // ============================================================
+    // LOAD DASHBOARD
+    // ============================================================
+    async function loadDashboard(userId) {
+        // Get user enrollments from Firestore
+        const enrollmentsRef = db.collection('users').doc(userId).collection('enrollments');
+        const snapshot = await enrollmentsRef.get();
+
+        const enrollments = {};
+        snapshot.forEach(doc => {
+            enrollments[doc.id] = doc.data();
+        });
+
+        // Categorize courses
+        const inProgress = [];
+        const completed = [];
+        const available = [];
+
+        Object.keys(allCourses).forEach(courseId => {
+            const course = allCourses[courseId];
+            if (enrollments[courseId]) {
+                if (enrollments[courseId].status === 'completed') {
+                    completed.push({ ...course, ...enrollments[courseId] });
+                } else {
+                    inProgress.push({ ...course, ...enrollments[courseId] });
+                }
+            } else {
+                available.push(course);
+            }
+        });
+
+        // Update stats
+        document.getElementById('inProgressCount').textContent = inProgress.length;
+        document.getElementById('completedCount').textContent = completed.length;
+        document.getElementById('availableCount').textContent = available.length;
+
+        // Render sections
+        renderInProgress(inProgress, userId);
+        renderCompleted(completed);
+        renderAvailable(available, userId);
+    }
+
+    // ============================================================
+    // RENDER FUNCTIONS
+    // ============================================================
+    function renderInProgress(courses, userId) {
+        const section = document.getElementById('inProgressSection');
+        const grid = document.getElementById('inProgressGrid');
+        grid.innerHTML = '';
+
+        if (courses.length === 0) {
+            section.style.display = 'none';
+            return;
+        }
+
+        section.style.display = 'block';
+        courses.forEach(course => {
+            const progress = course.progress || 0;
+            grid.innerHTML += `
+                <div class="course-card in-progress">
+                    <div class="course-card-header">
+                        <div class="course-card-icon"><i class="${course.icon}"></i></div>
+                        <span class="course-status status-progress"><i class="fas fa-play-circle"></i> നടക്കുന്നു</span>
+                    </div>
+                    <h4>${course.title}</h4>
+                    <p>${course.description}</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${progress}%;"></div>
+                    </div>
+                    <div class="progress-info">
+                        <span>${progress}% പൂർത്തിയായി</span>
+                        <span>${course.duration}</span>
+                    </div>
+                    <button class="course-btn continue-btn" onclick="alert('ക്ലാസ് ആരംഭിക്കുന്നു...')"><i class="fas fa-play"></i> തുടരുക</button>
+                </div>
+            `;
+        });
+    }
+
+    function renderCompleted(courses) {
+        const section = document.getElementById('completedSection');
+        const grid = document.getElementById('completedGrid');
+        grid.innerHTML = '';
+
+        if (courses.length === 0) {
+            section.style.display = 'none';
+            return;
+        }
+
+        section.style.display = 'block';
+        courses.forEach(course => {
+            grid.innerHTML += `
+                <div class="course-card completed">
+                    <div class="course-card-header">
+                        <div class="course-card-icon"><i class="${course.icon}"></i></div>
+                        <span class="course-status status-completed"><i class="fas fa-check-circle"></i> പൂർത്തിയായി</span>
+                    </div>
+                    <h4>${course.title}</h4>
+                    <p>${course.description}</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill full" style="width: 100%;"></div>
+                    </div>
+                    <div class="progress-info">
+                        <span>100% പൂർത്തിയായി</span>
+                        <span>${course.duration}</span>
+                    </div>
+                    <button class="course-btn cert-btn" onclick="alert('സർട്ടിഫിക്കറ്റ് ഡൗൺലോഡ് ചെയ്യുന്നു...')"><i class="fas fa-certificate"></i> സർട്ടിഫിക്കറ്റ്</button>
+                </div>
+            `;
+        });
+    }
+
+    function renderAvailable(courses, userId) {
+        const grid = document.getElementById('availableGrid');
+        grid.innerHTML = '';
+
+        courses.forEach(course => {
+            grid.innerHTML += `
+                <div class="course-card available" id="card-${course.id}">
+                    <div class="course-card-header">
+                        <div class="course-card-icon"><i class="${course.icon}"></i></div>
+                        <span class="course-status status-available"><i class="fas fa-lock-open"></i> ലഭ്യം</span>
+                    </div>
+                    <h4>${course.title}</h4>
+                    <p>${course.description}</p>
+                    <div class="course-meta">
+                        <span><i class="fas fa-clock"></i> ${course.duration}</span>
+                        <span><i class="fas fa-video"></i> ${course.totalClasses} ക്ലാസുകൾ</span>
+                    </div>
+                    <button class="course-btn enroll-btn" onclick="enrollCourse('${course.id}', '${userId}')"><i class="fas fa-plus"></i> ചേരുക</button>
+                </div>
+            `;
+        });
+    }
+
+    // ============================================================
+    // ENROLL IN COURSE
+    // ============================================================
+    async function enrollCourse(courseId, userId) {
+        const btn = document.querySelector(`#card-${courseId} .enroll-btn`);
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ചേരുന്നു...';
+
+        try {
+            await db.collection('users').doc(userId).collection('enrollments').doc(courseId).set({
+                status: 'in-progress',
+                progress: 0,
+                enrolledAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+
+            btn.innerHTML = '<i class="fas fa-check"></i> ചേർന്നു!';
+            btn.classList.add('enrolled');
+
+            // Reload dashboard after short delay
+            setTimeout(() => loadDashboard(userId), 1000);
+        } catch (error) {
+            alert('ചേരുന്നതിൽ പിശക്! വീണ്ടും ശ്രമിക്കുക.');
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-plus"></i> ചേരുക';
+        }
+    }
+
+    // ============================================================
+    // ERROR MESSAGES (Malayalam)
+    // ============================================================
+    function getErrorMessage(code) {
+        switch(code) {
+            case 'auth/user-not-found': return 'ഈ ഇമെയിൽ ഉപയോഗിച്ച് അക്കൗണ്ട് ഇല്ല';
+            case 'auth/wrong-password': return 'തെറ്റായ പാസ്‌വേഡ്';
+            case 'auth/email-already-in-use': return 'ഈ ഇമെയിൽ ഇതിനകം ഉപയോഗത്തിലാണ്';
+            case 'auth/weak-password': return 'പാസ്‌വേഡ് 6 അക്ഷരമെങ്കിലും ഉണ്ടായിരിക്കണം';
+            case 'auth/invalid-email': return 'ശരിയായ ഇമെയിൽ നൽകുക';
+            case 'auth/too-many-requests': return 'നിരവധി ശ്രമങ്ങൾ. അൽപ സമയം കഴിഞ്ഞ് ശ്രമിക്കുക';
+            case 'auth/invalid-credential': return 'ഇമെയിൽ അല്ലെങ്കിൽ പാസ്‌വേഡ് തെറ്റാണ്';
+            default: return 'ഒരു പിശക് സംഭവിച്ചു. വീണ്ടും ശ്രമിക്കുക.';
+        }
+    }
+    </script>
+</body>
+</html>

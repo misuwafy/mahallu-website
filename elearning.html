@@ -224,58 +224,18 @@
     const db = firebase.firestore();
 
     // ============================================================
-    // COURSE DATA
+    // COURSE DATA - Loaded from Firebase
     // ============================================================
-    const allCourses = {
-        quran: {
-            id: 'quran',
-            title: 'ഖുർആൻ പഠനം',
-            description: 'തജ്‌വീദ്, ഹിഫ്‌ള്, തഫ്‌സീർ',
-            duration: '12 ആഴ്ചകൾ',
-            totalClasses: 36,
-            icon: 'fas fa-book-quran'
-        },
-        fiqh: {
-            id: 'fiqh',
-            title: 'ഫിഖ്‌ഹ് & മസ്അലകൾ',
-            description: 'ശാഫിഈ ഫിഖ്‌ഹ്, ദൈനംദിന മസ്അലകൾ',
-            duration: '8 ആഴ്ചകൾ',
-            totalClasses: 24,
-            icon: 'fas fa-balance-scale'
-        },
-        arabic: {
-            id: 'arabic',
-            title: 'അറബിക് ഭാഷ',
-            description: 'അടിസ്ഥാന അറബിക്, സംഭാഷണം',
-            duration: '16 ആഴ്ചകൾ',
-            totalClasses: 48,
-            icon: 'fas fa-language'
-        },
-        hadith: {
-            id: 'hadith',
-            title: 'ഹദീസ് പഠനം',
-            description: 'റിയാളുസ്സ്വാലിഹീൻ, ബുഖാരി ശരീഫ്',
-            duration: '10 ആഴ്ചകൾ',
-            totalClasses: 30,
-            icon: 'fas fa-scroll'
-        },
-        history: {
-            id: 'history',
-            title: 'ഇസ്ലാമിക ചരിത്രം',
-            description: 'നബി ചരിത്രം, ഖുലഫാഉർറാശിദീൻ',
-            duration: '8 ആഴ്ചകൾ',
-            totalClasses: 24,
-            icon: 'fas fa-landmark'
-        },
-        kids: {
-            id: 'kids',
-            title: 'കുട്ടികൾക്കുള്ള കോഴ്സ്',
-            description: 'അക്ഷരം, ദുആകൾ, ചെറിയ സൂറത്തുകൾ',
-            duration: '6 ആഴ്ചകൾ',
-            totalClasses: 18,
-            icon: 'fas fa-child'
-        }
-    };
+    let allCourses = {};
+
+    async function loadCoursesFromDB() {
+        const snap = await db.collection('courses').get();
+        allCourses = {};
+        snap.forEach(doc => {
+            allCourses[doc.id] = { id: doc.id, ...doc.data() };
+        });
+        return allCourses;
+    }
 
     // ============================================================
     // DOM ELEMENTS
@@ -432,6 +392,9 @@
     // LOAD DASHBOARD
     // ============================================================
     async function loadDashboard(userId) {
+        // Load courses from Firebase
+        await loadCoursesFromDB();
+
         // Get user enrollments from Firestore
         const enrollmentsRef = db.collection('users').doc(userId).collection('enrollments');
         const snapshot = await enrollmentsRef.get();
@@ -460,6 +423,7 @@
         });
 
         // Update stats
+        document.getElementById('totalCourses').textContent = Object.keys(allCourses).length;
         document.getElementById('inProgressCount').textContent = inProgress.length;
         document.getElementById('completedCount').textContent = completed.length;
         document.getElementById('availableCount').textContent = available.length;

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | KIS E-Learning</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="elearning.css">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="el-header admin-header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="logo.jpg" alt="Logo" class="logo-img">
+                <div class="logo-text">
+                    <h1>Admin Panel</h1>
+                    <span>KIS E-Learning Management</span>
+                </div>
+            </a>
+            <div class="header-right">
+                <a href="elearning.html" class="back-home"><i class="fas fa-graduation-cap"></i> Student View</a>
+                <a href="#" class="logout-btn" id="adminLogout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Admin Login -->
+    <section class="el-main" id="adminLoginSection">
+        <div class="container">
+            <div class="auth-wrapper">
+                <div class="el-card">
+                    <div class="el-card-header">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Admin Login</h3>
+                    </div>
+                    <div class="error-msg" id="adminLoginError" style="display:none;"></div>
+                    <form id="adminLoginForm" class="el-form">
+                        <div class="form-group">
+                            <label><i class="fas fa-envelope"></i> Admin Email</label>
+                            <input type="email" id="adminEmail" placeholder="Admin email" required>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-lock"></i> Password</label>
+                            <input type="password" id="adminPassword" placeholder="Password" required>
+                        </div>
+                        <button type="submit" class="el-btn">
+                            <i class="fas fa-sign-in-alt"></i> Login as Admin
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Dashboard -->
+    <section class="el-main" id="adminDashboard" style="display:none;">
+        <div class="container">
+
+            <!-- Admin Stats -->
+            <div class="dash-stats">
+                <div class="dash-stat-item">
+                    <i class="fas fa-users"></i>
+                    <div>
+                        <span class="dash-stat-num" id="adminTotalUsers">0</span>
+                        <span class="dash-stat-label">Registered Users</span>
+                    </div>
+                </div>
+                <div class="dash-stat-item progress-stat">
+                    <i class="fas fa-book"></i>
+                    <div>
+                        <span class="dash-stat-num" id="adminTotalCourses">6</span>
+                        <span class="dash-stat-label">Courses</span>
+                    </div>
+                </div>
+                <div class="dash-stat-item completed-stat">
+                    <i class="fas fa-video"></i>
+                    <div>
+                        <span class="dash-stat-num" id="adminTotalLessons">0</span>
+                        <span class="dash-stat-label">Total Lessons</span>
+                    </div>
+                </div>
+                <div class="dash-stat-item available-stat">
+                    <i class="fas fa-question-circle"></i>
+                    <div>
+                        <span class="dash-stat-num" id="adminTotalQuizzes">0</span>
+                        <span class="dash-stat-label">Quizzes</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Tabs -->
+            <div class="admin-tabs">
+                <button class="tab-btn active" data-tab="courses"><i class="fas fa-book"></i> Courses & Lessons</button>
+                <button class="tab-btn" data-tab="quizzes"><i class="fas fa-question-circle"></i> Quizzes</button>
+                <button class="tab-btn" data-tab="users"><i class="fas fa-users"></i> Users</button>
+                <button class="tab-btn" data-tab="certificates"><i class="fas fa-certificate"></i> Certificates</button>
+            </div>
+
+            <!-- TAB: Courses & Lessons -->
+            <div class="tab-content active" id="tab-courses">
+                <div class="admin-section-header">
+                    <h3>Course Management</h3>
+                    <p>Select a course and add video/PDF/text lessons as a series</p>
+                </div>
+
+                <!-- Course Selector -->
+                <div class="form-group">
+                    <label><i class="fas fa-book"></i> Select Course</label>
+                    <select id="selectedCourse">
+                        <option value="quran">ഖുർആൻ പഠനം</option>
+                        <option value="fiqh">ഫിഖ്‌ഹ് & മസ്അലകൾ</option>
+                        <option value="arabic">അറബിക് ഭാഷ</option>
+                        <option value="hadith">ഹദീസ് പഠനം</option>
+                        <option value="history">ഇസ്ലാമിക ചരിത്രം</option>
+                        <option value="kids">കുട്ടികൾക്കുള്ള കോഴ്സ്</option>
+                    </select>
+                </div>
+
+                <!-- Add Lesson Form -->
+                <div class="admin-card">
+                    <h4><i class="fas fa-plus-circle"></i> Add New Lesson</h4>
+                    <form id="addLessonForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Series Number</label>
+                                <input type="number" id="lessonOrder" placeholder="1, 2, 3..." min="1" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Lesson Title</label>
+                                <input type="text" id="lessonTitle" placeholder="Lesson title" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Content Type</label>
+                            <select id="lessonType">
+                                <option value="video">🎬 Video (YouTube URL)</option>
+                                <option value="pdf">📄 PDF (URL link)</option>
+                                <option value="text">📝 Text Content</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="videoUrlGroup">
+                            <label>YouTube Video URL</label>
+                            <input type="url" id="lessonVideoUrl" placeholder="https://www.youtube.com/watch?v=...">
+                        </div>
+                        <div class="form-group" id="pdfUrlGroup" style="display:none;">
+                            <label>PDF URL (Google Drive / direct link)</label>
+                            <input type="url" id="lessonPdfUrl" placeholder="https://drive.google.com/...">
+                        </div>
+                        <div class="form-group" id="textContentGroup" style="display:none;">
+                            <label>Text Content</label>
+                            <textarea id="lessonTextContent" rows="6" placeholder="Lesson text content here..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Description (optional)</label>
+                            <input type="text" id="lessonDesc" placeholder="Brief description">
+                        </div>
+                        <button type="submit" class="el-btn"><i class="fas fa-upload"></i> Add Lesson</button>
+                    </form>
+                </div>
+
+                <!-- Existing Lessons -->
+                <div class="admin-card">
+                    <h4><i class="fas fa-list"></i> Existing Lessons</h4>
+                    <div id="lessonsList" class="lessons-list">
+                        <p class="empty-msg">Loading lessons...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB: Quizzes -->
+            <div class="tab-content" id="tab-quizzes">
+                <div class="admin-section-header">
+                    <h3>Quiz Management</h3>
+                    <p>Add quiz questions for each course. Students must pass to get certificate.</p>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-book"></i> Select Course for Quiz</label>
+                    <select id="quizCourse">
+                        <option value="quran">ഖുർആൻ പഠനം</option>
+                        <option value="fiqh">ഫിഖ്‌ഹ് & മസ്അലകൾ</option>
+                        <option value="arabic">അറബിക് ഭാഷ</option>
+                        <option value="hadith">ഹദീസ് പഠനം</option>
+                        <option value="history">ഇസ്ലാമിക ചരിത്രം</option>
+                        <option value="kids">കുട്ടികൾക്കുള്ള കോഴ്സ്</option>
+                    </select>
+                </div>
+
+                <!-- Add Quiz Question -->
+                <div class="admin-card">
+                    <h4><i class="fas fa-plus-circle"></i> Add Quiz Question</h4>
+                    <form id="addQuizForm">
+                        <div class="form-group">
+                            <label>Question</label>
+                            <input type="text" id="quizQuestion" placeholder="ചോദ്യം ടൈപ്പ് ചെയ്യുക" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Option A</label>
+                            <input type="text" id="optionA" placeholder="Option A" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Option B</label>
+                            <input type="text" id="optionB" placeholder="Option B" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Option C</label>
+                            <input type="text" id="optionC" placeholder="Option C" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Option D</label>
+                            <input type="text" id="optionD" placeholder="Option D" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Correct Answer</label>
+                            <select id="correctAnswer" required>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="el-btn"><i class="fas fa-plus"></i> Add Question</button>
+                    </form>
+                </div>
+
+                <!-- Existing Questions -->
+                <div class="admin-card">
+                    <h4><i class="fas fa-list"></i> Existing Questions</h4>
+                    <div id="quizList" class="lessons-list">
+                        <p class="empty-msg">Loading questions...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB: Users -->
+            <div class="tab-content" id="tab-users">
+                <div class="admin-section-header">
+                    <h3>Registered Users</h3>
+                    <p>View all registered students and their progress</p>
+                </div>
+                <div class="admin-card">
+                    <div id="usersList" class="users-list">
+                        <p class="empty-msg">Loading users...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB: Certificates -->
+            <div class="tab-content" id="tab-certificates">
+                <div class="admin-section-header">
+                    <h3>Certificates Issued</h3>
+                    <p>Students who passed quizzes and earned certificates</p>
+                </div>
+                <div class="admin-card">
+                    <div id="certList" class="users-list">
+                        <p class="empty-msg">Loading certificates...</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+    <script>
+    // Firebase Config
+    const firebaseConfig = {
+        apiKey: "AIzaSyDxyb5oCBJC9jP390TH4KBeEQ_gtKdUWzU",
+        authDomain: "kis-bpa-elearning.firebaseapp.com",
+        projectId: "kis-bpa-elearning",
+        storageBucket: "kis-bpa-elearning.firebasestorage.app",
+        messagingSenderId: "93086552613",
+        appId: "1:93086552613:web:a593b6e54baab67e5365cc"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // Admin email - CHANGE THIS to your admin email
+    const ADMIN_EMAIL = "kisbpa@gmail.com";
+
+    // ============================================================
+    // ADMIN AUTH
+    // ============================================================
+    document.getElementById('adminLoginForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('adminEmail').value;
+        const password = document.getElementById('adminPassword').value;
+        const errorEl = document.getElementById('adminLoginError');
+        errorEl.style.display = 'none';
+
+        try {
+            const cred = await auth.signInWithEmailAndPassword(email, password);
+            if (cred.user.email !== ADMIN_EMAIL) {
+                errorEl.textContent = 'You are not authorized as admin!';
+                errorEl.style.display = 'block';
+                auth.signOut();
+                return;
+            }
+            showAdminDashboard();
+        } catch (error) {
+            errorEl.textContent = 'Invalid credentials!';
+            errorEl.style.display = 'block';
+        }
+    });
+
+    auth.onAuthStateChanged((user) => {
+        if (user && user.email === ADMIN_EMAIL) {
+            showAdminDashboard();
+        }
+    });
+
+    document.getElementById('adminLogout').addEventListener('click', (e) => {
+        e.preventDefault();
+        auth.signOut();
+        location.reload();
+    });
+
+    function showAdminDashboard() {
+        document.getElementById('adminLoginSection').style.display = 'none';
+        document.getElementById('adminDashboard').style.display = 'block';
+        loadAdminData();
+    }
+
+    // ============================================================
+    // TABS
+    // ============================================================
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+        });
+    });
+
+    // ============================================================
+    // LESSON TYPE TOGGLE
+    // ============================================================
+    document.getElementById('lessonType').addEventListener('change', (e) => {
+        document.getElementById('videoUrlGroup').style.display = 'none';
+        document.getElementById('pdfUrlGroup').style.display = 'none';
+        document.getElementById('textContentGroup').style.display = 'none';
+
+        if (e.target.value === 'video') document.getElementById('videoUrlGroup').style.display = 'block';
+        if (e.target.value === 'pdf') document.getElementById('pdfUrlGroup').style.display = 'block';
+        if (e.target.value === 'text') document.getElementById('textContentGroup').style.display = 'block';
+    });
+
+    // ============================================================
+    // ADD LESSON
+    // ============================================================
+    document.getElementById('addLessonForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const courseId = document.getElementById('selectedCourse').value;
+        const order = parseInt(document.getElementById('lessonOrder').value);
+        const title = document.getElementById('lessonTitle').value;
+        const type = document.getElementById('lessonType').value;
+        const desc = document.getElementById('lessonDesc').value;
+
+        let content = '';
+        if (type === 'video') content = document.getElementById('lessonVideoUrl').value;
+        if (type === 'pdf') content = document.getElementById('lessonPdfUrl').value;
+        if (type === 'text') content = document.getElementById('lessonTextContent').value;
+
+        if (!content) {
+            alert('Please add content (URL or text)!');
+            return;
+        }
+
+        try {
+            await db.collection('courses').doc(courseId).collection('lessons').add({
+                order: order,
+                title: title,
+                type: type,
+                content: content,
+                description: desc,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            alert('Lesson added successfully!');
+            e.target.reset();
+            document.getElementById('videoUrlGroup').style.display = 'block';
+            document.getElementById('pdfUrlGroup').style.display = 'none';
+            document.getElementById('textContentGroup').style.display = 'none';
+            loadLessons(courseId);
+        } catch (error) {
+            alert('Error: ' + error.message);
+        }
+    });
+
+    // ============================================================
+    // ADD QUIZ QUESTION
+    // ============================================================
+    document.getElementById('addQuizForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const courseId = document.getElementById('quizCourse').value;
+        const question = document.getElementById('quizQuestion').value;
+        const options = {
+            A: document.getElementById('optionA').value,
+            B: document.getElementById('optionB').value,
+            C: document.getElementById('optionC').value,
+            D: document.getElementById('optionD').value
+        };
+        const correct = document.getElementById('correctAnswer').value;
+
+        try {
+            await db.collection('courses').doc(courseId).collection('quizzes').add({
+                question: question,
+                options: options,
+                correctAnswer: correct,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            alert('Question added!');
+            e.target.reset();
+            loadQuizzes(courseId);
+        } catch (error) {
+            alert('Error: ' + error.message);
+        }
+    });
+
+    // ============================================================
+    // LOAD DATA
+    // ============================================================
+    async function loadAdminData() {
+        // Load users count
+        const usersSnap = await db.collection('users').get();
+        document.getElementById('adminTotalUsers').textContent = usersSnap.size;
+
+        // Load lessons for selected course
+        const courseId = document.getElementById('selectedCourse').value;
+        loadLessons(courseId);
+        loadQuizzes(document.getElementById('quizCourse').value);
+        loadUsers(usersSnap);
+        loadCertificates();
+
+        // Count total lessons & quizzes
+        let totalLessons = 0;
+        let totalQuizzes = 0;
+        const courseIds = ['quran', 'fiqh', 'arabic', 'hadith', 'history', 'kids'];
+        for (const cid of courseIds) {
+            const lSnap = await db.collection('courses').doc(cid).collection('lessons').get();
+            const qSnap = await db.collection('courses').doc(cid).collection('quizzes').get();
+            totalLessons += lSnap.size;
+            totalQuizzes += qSnap.size;
+        }
+        document.getElementById('adminTotalLessons').textContent = totalLessons;
+        document.getElementById('adminTotalQuizzes').textContent = totalQuizzes;
+    }
+
+    // Course change listener
+    document.getElementById('selectedCourse').addEventListener('change', (e) => {
+        loadLessons(e.target.value);
+    });
+    document.getElementById('quizCourse').addEventListener('change', (e) => {
+        loadQuizzes(e.target.value);
+    });
+
+    async function loadLessons(courseId) {
+        const container = document.getElementById('lessonsList');
+        container.innerHTML = '<p class="empty-msg">Loading...</p>';
+
+        const snap = await db.collection('courses').doc(courseId).collection('lessons').orderBy('order').get();
+
+        if (snap.empty) {
+            container.innerHTML = '<p class="empty-msg">No lessons added yet.</p>';
+            return;
+        }
+
+        let html = '';
+        snap.forEach(doc => {
+            const d = doc.data();
+            const typeIcon = d.type === 'video' ? '🎬' : d.type === 'pdf' ? '📄' : '📝';
+            html += `
+                <div class="lesson-item">
+                    <span class="lesson-order">${d.order}</span>
+                    <span class="lesson-type-icon">${typeIcon}</span>
+                    <div class="lesson-info">
+                        <strong>${d.title}</strong>
+                        <small>${d.description || ''}</small>
+                    </div>
+                    <button class="delete-btn" onclick="deleteLesson('${courseId}', '${doc.id}')"><i class="fas fa-trash"></i></button>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+    }
+
+    async function loadQuizzes(courseId) {
+        const container = document.getElementById('quizList');
+        container.innerHTML = '<p class="empty-msg">Loading...</p>';
+
+        const snap = await db.collection('courses').doc(courseId).collection('quizzes').get();
+
+        if (snap.empty) {
+            container.innerHTML = '<p class="empty-msg">No questions added yet.</p>';
+            return;
+        }
+
+        let html = '';
+        let i = 1;
+        snap.forEach(doc => {
+            const d = doc.data();
+            html += `
+                <div class="lesson-item quiz-item">
+                    <span class="lesson-order">${i}</span>
+                    <div class="lesson-info">
+                        <strong>${d.question}</strong>
+                        <small>A: ${d.options.A} | B: ${d.options.B} | C: ${d.options.C} | D: ${d.options.D} | ✅ ${d.correctAnswer}</small>
+                    </div>
+                    <button class="delete-btn" onclick="deleteQuiz('${courseId}', '${doc.id}')"><i class="fas fa-trash"></i></button>
+                </div>
+            `;
+            i++;
+        });
+        container.innerHTML = html;
+    }
+
+    async function loadUsers(usersSnap) {
+        const container = document.getElementById('usersList');
+        if (usersSnap.empty) {
+            container.innerHTML = '<p class="empty-msg">No users registered yet.</p>';
+            return;
+        }
+
+        let html = '<table class="admin-table"><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Address</th><th>Joined</th></tr></thead><tbody>';
+        usersSnap.forEach(doc => {
+            const d = doc.data();
+            const date = d.createdAt ? d.createdAt.toDate().toLocaleDateString() : 'N/A';
+            html += `<tr><td>${d.name || '-'}</td><td>${d.email || '-'}</td><td>${d.phone || '-'}</td><td>${d.address || '-'}</td><td>${date}</td></tr>`;
+        });
+        html += '</tbody></table>';
+        container.innerHTML = html;
+    }
+
+    async function loadCertificates() {
+        const container = document.getElementById('certList');
+        const snap = await db.collection('certificates').get();
+
+        if (snap.empty) {
+            container.innerHTML = '<p class="empty-msg">No certificates issued yet.</p>';
+            return;
+        }
+
+        let html = '<table class="admin-table"><thead><tr><th>Student</th><th>Course</th><th>Score</th><th>Date</th></tr></thead><tbody>';
+        snap.forEach(doc => {
+            const d = doc.data();
+            const date = d.issuedAt ? d.issuedAt.toDate().toLocaleDateString() : 'N/A';
+            html += `<tr><td>${d.userName || '-'}</td><td>${d.courseTitle || '-'}</td><td>${d.score}%</td><td>${date}</td></tr>`;
+        });
+        html += '</tbody></table>';
+        container.innerHTML = html;
+    }
+
+    // ============================================================
+    // DELETE FUNCTIONS
+    // ============================================================
+    async function deleteLesson(courseId, lessonId) {
+        if (!confirm('Delete this lesson?')) return;
+        await db.collection('courses').doc(courseId).collection('lessons').doc(lessonId).delete();
+        loadLessons(courseId);
+    }
+
+    async function deleteQuiz(courseId, quizId) {
+        if (!confirm('Delete this question?')) return;
+        await db.collection('courses').doc(courseId).collection('quizzes').doc(quizId).delete();
+        loadQuizzes(courseId);
+    }
+    </script>
+</body>
+</html>

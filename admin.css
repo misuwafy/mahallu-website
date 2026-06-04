@@ -1,0 +1,261 @@
+/* ===== ADMIN STYLES ===== */
+
+.admin-header {
+    border-bottom: 3px solid var(--gold);
+}
+
+/* Tabs */
+.admin-tabs {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 30px;
+    background: var(--white);
+    padding: 8px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    padding: 12px 20px;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: var(--radius);
+    transition: var(--transition);
+    color: var(--gray);
+}
+
+.tab-btn:hover {
+    background: var(--light-bg);
+    color: var(--dark);
+}
+
+.tab-btn.active {
+    background: var(--primary);
+    color: var(--white);
+}
+
+.tab-btn i {
+    margin-right: 6px;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Admin Section Header */
+.admin-section-header {
+    margin-bottom: 25px;
+}
+
+.admin-section-header h3 {
+    font-size: 1.3rem;
+    color: var(--dark);
+    margin-bottom: 5px;
+}
+
+.admin-section-header p {
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+/* Admin Card */
+.admin-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 25px;
+    box-shadow: var(--shadow);
+    margin-bottom: 25px;
+}
+
+.admin-card h4 {
+    font-size: 1.05rem;
+    color: var(--dark);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--gray-light);
+}
+
+.admin-card h4 i {
+    color: var(--primary);
+    margin-right: 8px;
+}
+
+/* Form Row */
+.form-row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 15px;
+}
+
+.admin-card .form-group {
+    margin-bottom: 15px;
+}
+
+.admin-card label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--dark);
+    margin-bottom: 5px;
+}
+
+.admin-card input,
+.admin-card select,
+.admin-card textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 2px solid var(--gray-light);
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+    font-family: inherit;
+    transition: var(--transition);
+}
+
+.admin-card input:focus,
+.admin-card select:focus,
+.admin-card textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.admin-card textarea {
+    resize: vertical;
+}
+
+/* Lessons List */
+.lessons-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.lesson-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--gray-light);
+    transition: var(--transition);
+}
+
+.lesson-item:hover {
+    background: var(--light-bg);
+}
+
+.lesson-item:last-child {
+    border-bottom: none;
+}
+
+.lesson-order {
+    width: 30px;
+    height: 30px;
+    background: var(--primary);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.lesson-type-icon {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.lesson-info {
+    flex: 1;
+}
+
+.lesson-info strong {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--dark);
+}
+
+.lesson-info small {
+    color: var(--gray);
+    font-size: 0.78rem;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: #dc3545;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.delete-btn:hover {
+    background: #f8d7da;
+}
+
+/* Admin Table */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.admin-table thead {
+    background: var(--primary);
+    color: var(--white);
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--gray-light);
+}
+
+.admin-table tbody tr:hover {
+    background: var(--light-bg);
+}
+
+/* Empty Message */
+.empty-msg {
+    text-align: center;
+    color: var(--gray);
+    padding: 30px;
+    font-size: 0.9rem;
+}
+
+/* Quiz Item */
+.quiz-item .lesson-info small {
+    display: block;
+    margin-top: 4px;
+    line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .admin-tabs {
+        flex-direction: column;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-table {
+        font-size: 0.75rem;
+    }
+
+    .admin-table th,
+    .admin-table td {
+        padding: 8px 6px;
+    }
+}

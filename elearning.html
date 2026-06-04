@@ -501,7 +501,7 @@
                         <span>${progress}% പൂർത്തിയായി</span>
                         <span>${course.duration}</span>
                     </div>
-                    <button class="course-btn continue-btn" onclick="alert('ക്ലാസ് ആരംഭിക്കുന്നു...')"><i class="fas fa-play"></i> തുടരുക</button>
+                    <button class="course-btn continue-btn" onclick="openCourse('${course.id}', '${userId}')"><i class="fas fa-play"></i> തുടരുക</button>
                 </div>
             `;
         });
@@ -534,7 +534,7 @@
                         <span>100% പൂർത്തിയായി</span>
                         <span>${course.duration}</span>
                     </div>
-                    <button class="course-btn cert-btn" onclick="alert('സർട്ടിഫിക്കറ്റ് ഡൗൺലോഡ് ചെയ്യുന്നു...')"><i class="fas fa-certificate"></i> സർട്ടിഫിക്കറ്റ്</button>
+                    <button class="course-btn cert-btn" onclick="showCertificate('${userDisplayName.textContent}', '${course.title}', ${course.quizScore || 100})"><i class="fas fa-certificate"></i> സർട്ടിഫിക്കറ്റ്</button>
                 </div>
             `;
         });
@@ -575,13 +575,12 @@
             await db.collection('users').doc(userId).collection('enrollments').doc(courseId).set({
                 status: 'in-progress',
                 progress: 0,
+                currentLesson: 0,
                 enrolledAt: firebase.firestore.FieldValue.serverTimestamp()
             });
 
             btn.innerHTML = '<i class="fas fa-check"></i> ചേർന്നു!';
             btn.classList.add('enrolled');
-
-            // Reload dashboard after short delay
             setTimeout(() => loadDashboard(userId), 1000);
         } catch (error) {
             alert('ചേരുന്നതിൽ പിശക്! വീണ്ടും ശ്രമിക്കുക.');
@@ -591,8 +590,276 @@
     }
 
     // ============================================================
-    // ERROR MESSAGES (Malayalam)
+    // OPEN COURSE (View Lessons)
     // ============================================================
+    async function openCourse(courseId, userId) {
+        const course = allCourses[courseId];
+        // Get lessons
+        const lessonsSnap = await db.collection('courses').doc(courseId).collection('lessons').orderBy('order').get();
+
+        if (lessonsSnap.empty) {
+            alert('ഈ കോഴ്സിൽ ഇതുവരെ ക്ലാസുകൾ ചേർത്തിട്ടില്ല. ദയവായി പിന്നീട് ശ്രമിക്കുക.');
+            return;
+        }
+
+        // Get user progress
+        const enrollDoc = await db.collection('users').doc(userId).collection('enrollments').doc(courseId).get();
+        const currentLesson = enrollDoc.exists ? (enrollDoc.data().currentLesson || 0) : 0;
+
+        const lessons = [];
+        lessonsSnap.forEach(doc => lessons.push({ id: doc.id, ...doc.data() }));
+
+        // Build course view
+        let lessonsHtml = '';
+        lessons.forEach((lesson, index) => {
+            const isCompleted = index < currentLesson;
+            const isCurrent = index === currentLesson;
+            const isLocked = index > currentLesson;
+            const statusClass = isCompleted ? 'lesson-done' : isCurrent ? 'lesson-current' : 'lesson-locked';
+            const typeIcon = lesson.type === 'video' ? 'fa-play-circle' : lesson.type === 'pdf' ? 'fa-file-pdf' : 'fa-align-left';
+
+            lessonsHtml += `
+                <div class="student-lesson ${statusClass}" data-index="${index}" onclick="${isLocked ? '' : `viewLesson('${courseId}', '${lesson.id}', ${index}, '${userId}', ${lessons.length})`}">
+                    <div class="sl-status">
+                        ${isCompleted ? '<i class="fas fa-check-circle"></i>' : isCurrent ? '<i class="fas fa-play-circle"></i>' : '<i class="fas fa-lock"></i>'}
+                    </div>
+                    <div class="sl-info">
+                        <span class="sl-order">Lesson ${lesson.order}</span>
+                        <h5>${lesson.title}</h5>
+                        <small><i class="fas ${typeIcon}"></i> ${lesson.type === 'video' ? 'Video' : lesson.type === 'pdf' ? 'PDF' : 'Text'}</small>
+                    </div>
+                </div>
+            `;
+        });
+
+        // Check if all lessons completed → show quiz button
+        const allDone = currentLesson >= lessons.length;
+        const quizBtn = allDone ? `<button class="course-btn enroll-btn" onclick="startQuiz('${courseId}', '${userId}')"><i class="fas fa-question-circle"></i> ക്വിസ് എഴുതുക (Certificate)</button>` : '';
+
+        dashboardSection.innerHTML = `
+            <div class="container">
+                <button class="back-btn" onclick="location.reload()"><i class="fas fa-arrow-left"></i> ഡാഷ്ബോർഡിലേക്ക്</button>
+                <div class="course-view-header">
+                    <h2><i class="${course.icon}"></i> ${course.title}</h2>
+                    <p>${course.description}</p>
+                    <div class="progress-bar" style="margin-top:15px;">
+                        <div class="progress-fill ${allDone ? 'full' : ''}" style="width: ${Math.round((currentLesson/lessons.length)*100)}%;"></div>
+                    </div>
+                    <p class="progress-text">${currentLesson}/${lessons.length} lessons completed</p>
+                </div>
+                <div class="student-lessons-list">
+                    ${lessonsHtml}
+                </div>
+                ${quizBtn}
+            </div>
+        `;
+    }
+
+    // ============================================================
+    // VIEW LESSON
+    // ============================================================
+    async function viewLesson(courseId, lessonId, index, userId, totalLessons) {
+        const lessonDoc = await db.collection('courses').doc(courseId).collection('lessons').doc(lessonId).get();
+        const lesson = lessonDoc.data();
+
+        let contentHtml = '';
+        if (lesson.type === 'video') {
+            const videoId = extractYouTubeId(lesson.content);
+            contentHtml = videoId
+                ? `<div class="video-container"><iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe></div>`
+                : `<p>Video: <a href="${lesson.content}" target="_blank">${lesson.content}</a></p>`;
+        } else if (lesson.type === 'pdf') {
+            contentHtml = `<div class="pdf-container"><iframe src="${lesson.content}" frameborder="0"></iframe><p><a href="${lesson.content}" target="_blank"><i class="fas fa-external-link-alt"></i> PDF പുതിയ ടാബിൽ തുറക്കുക</a></p></div>`;
+        } else {
+            contentHtml = `<div class="text-content">${lesson.content.replace(/\n/g, '<br>')}</div>`;
+        }
+
+        // Create modal
+        const modal = document.createElement('div');
+        modal.className = 'lesson-modal';
+        modal.innerHTML = `
+            <div class="lesson-modal-content">
+                <div class="lesson-modal-header">
+                    <h3>Lesson ${lesson.order}: ${lesson.title}</h3>
+                    <button class="modal-close" onclick="this.closest('.lesson-modal').remove()"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="lesson-modal-body">
+                    ${contentHtml}
+                    ${lesson.description ? `<p class="lesson-desc">${lesson.description}</p>` : ''}
+                </div>
+                <div class="lesson-modal-footer">
+                    <button class="el-btn" onclick="completeLesson('${courseId}', ${index}, '${userId}', ${totalLessons}); this.closest('.lesson-modal').remove();">
+                        <i class="fas fa-check"></i> പൂർത്തിയാക്കി - അടുത്തത്
+                    </button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+    }
+
+    // ============================================================
+    // COMPLETE LESSON
+    // ============================================================
+    async function completeLesson(courseId, lessonIndex, userId, totalLessons) {
+        const nextLesson = lessonIndex + 1;
+        const progress = Math.round((nextLesson / totalLessons) * 100);
+
+        await db.collection('users').doc(userId).collection('enrollments').doc(courseId).update({
+            currentLesson: nextLesson,
+            progress: progress,
+            status: nextLesson >= totalLessons ? 'lessons-completed' : 'in-progress'
+        });
+
+        // Reload course view
+        openCourse(courseId, userId);
+    }
+
+    // ============================================================
+    // QUIZ
+    // ============================================================
+    async function startQuiz(courseId, userId) {
+        const course = allCourses[courseId];
+        const quizSnap = await db.collection('courses').doc(courseId).collection('quizzes').get();
+
+        if (quizSnap.empty) {
+            alert('ക്വിസ് ഇതുവരെ ചേർത്തിട്ടില്ല. ദയവായി Admin-നെ ബന്ധപ്പെടുക.');
+            return;
+        }
+
+        const questions = [];
+        quizSnap.forEach(doc => questions.push({ id: doc.id, ...doc.data() }));
+
+        let quizHtml = `
+            <div class="container">
+                <div class="quiz-header">
+                    <h2><i class="fas fa-question-circle"></i> ${course.title} - ക്വിസ്</h2>
+                    <p>${questions.length} ചോദ്യങ്ങൾ | 70% ശരിയാകണം സർട്ടിഫിക്കറ്റിന്</p>
+                </div>
+                <form id="quizForm" class="quiz-form">
+        `;
+
+        questions.forEach((q, i) => {
+            quizHtml += `
+                <div class="quiz-question">
+                    <h4>${i + 1}. ${q.question}</h4>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q${i}" value="A" required> ${q.options.A}</label>
+                        <label><input type="radio" name="q${i}" value="B"> ${q.options.B}</label>
+                        <label><input type="radio" name="q${i}" value="C"> ${q.options.C}</label>
+                        <label><input type="radio" name="q${i}" value="D"> ${q.options.D}</label>
+                    </div>
+                </div>
+            `;
+        });
+
+        quizHtml += `
+                    <button type="submit" class="el-btn"><i class="fas fa-paper-plane"></i> Submit Quiz</button>
+                </form>
+            </div>
+        `;
+
+        dashboardSection.innerHTML = quizHtml;
+
+        // Handle quiz submit
+        document.getElementById('quizForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            let correct = 0;
+            questions.forEach((q, i) => {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                if (selected && selected.value === q.correctAnswer) correct++;
+            });
+
+            const score = Math.round((correct / questions.length) * 100);
+            const passed = score >= 70;
+
+            if (passed) {
+                // Save certificate
+                const userDoc = await db.collection('users').doc(userId).get();
+                const userName = userDoc.exists ? userDoc.data().name : 'Student';
+
+                await db.collection('certificates').add({
+                    userId: userId,
+                    userName: userName,
+                    courseId: courseId,
+                    courseTitle: course.title,
+                    score: score,
+                    issuedAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+
+                // Update enrollment status
+                await db.collection('users').doc(userId).collection('enrollments').doc(courseId).update({
+                    status: 'completed',
+                    progress: 100,
+                    completedAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    quizScore: score
+                });
+
+                // Show certificate
+                showCertificate(userName, course.title, score);
+            } else {
+                dashboardSection.innerHTML = `
+                    <div class="container" style="text-align:center; padding:60px 20px;">
+                        <i class="fas fa-times-circle" style="font-size:4rem; color:#dc3545; margin-bottom:20px;"></i>
+                        <h2>ക്വിസ് പാസായില്ല</h2>
+                        <p>നിങ്ങളുടെ സ്കോർ: ${score}% (70% വേണം)</p>
+                        <p>${correct}/${questions.length} ശരിയായ ഉത്തരങ്ങൾ</p>
+                        <p style="margin-top:15px; color:var(--gray);">പാഠങ്ങൾ വീണ്ടും പഠിച്ച് ശ്രമിക്കുക</p>
+                        <button class="el-btn" style="max-width:300px; margin:20px auto;" onclick="location.reload()"><i class="fas fa-redo"></i> ഡാഷ്ബോർഡിലേക്ക്</button>
+                    </div>
+                `;
+            }
+        });
+    }
+
+    // ============================================================
+    // CERTIFICATE
+    // ============================================================
+    function showCertificate(name, courseTitle, score) {
+        const date = new Date().toLocaleDateString('ml-IN');
+        dashboardSection.innerHTML = `
+            <div class="container">
+                <div class="certificate" id="certificate">
+                    <div class="cert-border">
+                        <div class="cert-content">
+                            <div class="cert-logo"><img src="logo.jpg" alt="Logo" style="height:60px;"></div>
+                            <h2>CERTIFICATE OF COMPLETION</h2>
+                            <p class="cert-subtitle">ഖാദിമുൽ ഇസ്ലാം സഭ BP അങ്ങാടി - E-Learning Portal</p>
+                            <div class="cert-body">
+                                <p>This is to certify that</p>
+                                <h3 class="cert-name">${name}</h3>
+                                <p>has successfully completed the course</p>
+                                <h3 class="cert-course">${courseTitle}</h3>
+                                <p>with a score of <strong>${score}%</strong></p>
+                            </div>
+                            <div class="cert-footer">
+                                <div class="cert-date">
+                                    <p>Date</p>
+                                    <strong>${date}</strong>
+                                </div>
+                                <div class="cert-seal">🏅</div>
+                                <div class="cert-sign">
+                                    <p>Authorized By</p>
+                                    <strong>KIS BP Angadi</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align:center; margin-top:20px;">
+                    <button class="el-btn" style="max-width:200px;" onclick="window.print()"><i class="fas fa-print"></i> Print Certificate</button>
+                    <button class="el-btn" style="max-width:200px; background:var(--gold); color:var(--dark); margin-left:10px;" onclick="location.reload()"><i class="fas fa-home"></i> Dashboard</button>
+                </div>
+            </div>
+        `;
+    }
+
+    // ============================================================
+    // HELPERS
+    // ============================================================
+    function extractYouTubeId(url) {
+        const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([^&\s?]+)/);
+        return match ? match[1] : null;
+    }
     function getErrorMessage(code) {
         switch(code) {
             case 'auth/user-not-found': return 'ഈ ഇമെയിൽ ഉപയോഗിച്ച് അക്കൗണ്ട് ഇല്ല';

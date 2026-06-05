@@ -35,6 +35,9 @@
         .team-grid {
             display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 10px;
         }
+        .team-grid-3 {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 10px;
+        }
         .team-member {
             background: var(--white); border-radius: var(--radius);
             padding: 20px 15px; text-align: center;
@@ -47,8 +50,17 @@
             display: flex; align-items: center; justify-content: center;
             margin: 0 auto 10px; color: var(--white); font-size: 1.3rem;
         }
+        .team-member .tm-photo {
+            width: 70px; height: 70px; border-radius: 50%;
+            overflow: hidden; margin: 0 auto 10px;
+            border: 3px solid var(--primary);
+        }
+        .team-member .tm-photo img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
         .team-member h4 { font-size: 0.88rem; color: var(--dark); margin-bottom: 3px; }
         .team-member p { font-size: 0.75rem; color: var(--gray); }
+        .team-member .tm-role { color: var(--primary); font-weight: 600; font-size: 0.72rem; text-transform: uppercase; }
         .members-list-table {
             width: 100%; border-collapse: collapse; margin-top: 15px;
             background: var(--white); border-radius: var(--radius); overflow: hidden;
@@ -65,10 +77,10 @@
         .members-list-table tr:last-child td { border-bottom: none; }
         .sl-no { width: 40px; text-align: center; font-weight: 600; color: var(--primary); }
         @media (max-width: 768px) {
-            .team-grid { grid-template-columns: repeat(2, 1fr); }
+            .team-grid, .team-grid-3 { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 480px) {
-            .team-grid { grid-template-columns: 1fr; }
+            .team-grid, .team-grid-3 { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -87,21 +99,31 @@
 
         <!-- Executive Members -->
         <div class="team-section-title"><i class="fas fa-star"></i> എക്സിക്യൂട്ടീവ് അംഗങ്ങൾ</div>
-        <div class="team-grid">
+        <div class="team-grid-3">
             <div class="team-member">
-                <div class="tm-icon"><i class="fas fa-user-tie"></i></div>
+                <div class="tm-photo"><img src="president.jpg" alt="President"></div>
                 <h4>എം സൈനുദ്ദീൻ മാസ്റ്റർ</h4>
-                <p>President</p>
+                <p class="tm-role">President</p>
             </div>
             <div class="team-member">
-                <div class="tm-icon"><i class="fas fa-user-edit"></i></div>
+                <div class="tm-photo"><img src="secratay.jpg" alt="Gen. Secretary"></div>
                 <h4>അബ്ദുറഹ്മാൻ നാലകത്ത്</h4>
-                <p>Gen. Secretary</p>
+                <p class="tm-role">Gen. Secretary</p>
             </div>
             <div class="team-member">
-                <div class="tm-icon"><i class="fas fa-coins"></i></div>
+                <div class="tm-photo"><img src="TREASURER.jpg" alt="Treasurer"></div>
                 <h4>കുഞ്ഞഹമ്മദ് കെ ടി</h4>
-                <p>Treasurer</p>
+                <p class="tm-role">Treasurer</p>
+            </div>
+        </div>
+
+        <!-- Office Secretary -->
+        <div class="team-section-title"><i class="fas fa-headset"></i> ഓഫീസ് സെക്രട്ടറി</div>
+        <div class="team-grid" style="grid-template-columns: 1fr; max-width: 250px;">
+            <div class="team-member">
+                <div class="tm-photo"><img src="office-secretary.jpg" alt="Office Secretary"></div>
+                <h4>പി സുലൈമാൻ മുസ്ലിയാർ</h4>
+                <p class="tm-role">Office Secretary</p>
             </div>
         </div>
 
@@ -109,19 +131,19 @@
         <div class="team-section-title"><i class="fas fa-user-tie"></i> വൈസ് പ്രസിഡന്റുമാർ</div>
         <div class="team-grid">
             <div class="team-member">
-                <div class="tm-icon"><i class="fas fa-user"></i></div>
+                <div class="tm-photo"><img src="vp1.jpg" alt="VP"></div>
                 <h4>കള്ളിയത്ത് അഹ്മദ് കോയ</h4>
             </div>
             <div class="team-member">
-                <div class="tm-icon"><i class="fas fa-user"></i></div>
+                <div class="tm-photo"><img src="vp2.jpg" alt="VP"></div>
                 <h4>എം കെ ഖാലിദ് ഹാജി</h4>
             </div>
             <div class="team-member">
-                <div class="tm-icon"><i class="fas fa-user"></i></div>
+                <div class="tm-photo"><img src="vp3.jpg" alt="VP"></div>
                 <h4>ശുക്കൂർ ഹാജി നാലകത്ത്</h4>
             </div>
             <div class="team-member">
-                <div class="tm-icon"><i class="fas fa-user"></i></div>
+                <div class="tm-photo"><img src="vp4.jpg" alt="VP"></div>
                 <h4>കെ പി മൊയ്തുട്ടി ഹാജി</h4>
             </div>
         </div>
@@ -130,11 +152,11 @@
         <div class="team-section-title"><i class="fas fa-user-edit"></i> ജോയിന്റ് സെക്രട്ടറിമാർ</div>
         <div class="team-grid">
             <div class="team-member">
-                <div class="tm-icon"><i class="fas fa-user"></i></div>
+                <div class="tm-photo"><img src="js1.jpg" alt="JS"></div>
                 <h4>നൂറുൽ അമീൻ</h4>
             </div>
             <div class="team-member">
-                <div class="tm-icon"><i class="fas fa-user"></i></div>
+                <div class="tm-photo"><img src="js2.jpg" alt="JS"></div>
                 <h4>അബ്ദുൽ അസീസ് പി</h4>
             </div>
             <div class="team-member">
@@ -142,7 +164,7 @@
                 <h4>കെ എൻ അന്നസീം</h4>
             </div>
             <div class="team-member">
-                <div class="tm-icon"><i class="fas fa-user"></i></div>
+                <div class="tm-photo"><img src="js4.JPG" alt="JS"></div>
                 <h4>മുസ്അബ് വാഫി കെ</h4>
             </div>
         </div>
@@ -154,37 +176,36 @@
                 <tr>
                     <th class="sl-no">No</th>
                     <th>പേര്</th>
-                    <th>സ്ഥാനം</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- ✏️ ഇവിടെ 27 അംഗങ്ങളുടെ പേരും സ്ഥാനവും ചേർക്കുക -->
-                <tr><td class="sl-no">1</td><td>എം സൈനുദ്ദീൻ മാസ്റ്റർ</td><td>പ്രസിഡന്റ്</td></tr>
-                <tr><td class="sl-no">2</td><td>അബ്ദുറഹ്മാൻ നാലകത്ത്</td><td>ജനറൽ സെക്രട്ടറി</td></tr>
-                <tr><td class="sl-no">3</td><td>കുഞ്ഞഹമ്മദ് കെ ടി</td><td>ട്രഷറർ</td></tr>
-                <tr><td class="sl-no">4</td><td>കള്ളിയത്ത് അഹ്മദ് കോയ</td><td>വൈസ് പ്രസിഡന്റ്</td></tr>
-                <tr><td class="sl-no">6</td><td>എം കെ ഖാലിദ് ഹാജി</td><td>വൈസ് പ്രസിഡന്റ്</td></tr>
-                <tr><td class="sl-no">7</td><td>ശുക്കൂർ ഹാജി നാലകത്ത്</td><td>വൈസ് പ്രസിഡന്റ്</td></tr>
-                <tr><td class="sl-no">8</td><td>കെ പി മൊയ്തുട്ടി ഹാജി</td><td>വൈസ് പ്രസിഡന്റ്</td></tr>
-                <tr><td class="sl-no">9</td><td>നൂറുൽ അമീൻ</td><td>ജോയിന്റ് സെക്രട്ടറി</td></tr>
-                <tr><td class="sl-no">10</td><td>അബ്ദുൽ അസീസ് പി</td><td>ജോയിന്റ് സെക്രട്ടറി</td></tr>
-                <tr><td class="sl-no">11</td><td>കെ എൻ അന്നസീം</td><td>ജോയിന്റ് സെക്രട്ടറി</td></tr>
-                <tr><td class="sl-no">12</td><td>മുസ്അബ് വാഫി കെ</td><td>ജോയിന്റ് സെക്രട്ടറി</td></tr>
-                <tr><td class="sl-no">13</td><td>അംഗം 13</td><td>അംഗം</td></tr>
-                <tr><td class="sl-no">14</td><td>അംഗം 14</td><td>അംഗം</td></tr>
-                <tr><td class="sl-no">15</td><td>അംഗം 15</td><td>അംഗം</td></tr>
-                <tr><td class="sl-no">16</td><td>അംഗം 16</td><td>അംഗം</td></tr>
-                <tr><td class="sl-no">17</td><td>അംഗം 17</td><td>അംഗം</td></tr>
-                <tr><td class="sl-no">18</td><td>അംഗം 18</td><td>അംഗം</td></tr>
-                <tr><td class="sl-no">19</td><td>അംഗം 19</td><td>അംഗം</td></tr>
-                <tr><td class="sl-no">20</td><td>അംഗം 20</td><td>അംഗം</td></tr>
-                <tr><td class="sl-no">21</td><td>അംഗം 21</td><td>അംഗം</td></tr>
-                <tr><td class="sl-no">22</td><td>അംഗം 22</td><td>അംഗം</td></tr>
-                <tr><td class="sl-no">23</td><td>അംഗം 23</td><td>അംഗം</td></tr>
-                <tr><td class="sl-no">24</td><td>അംഗം 24</td><td>അംഗം</td></tr>
-                <tr><td class="sl-no">25</td><td>അംഗം 25</td><td>അംഗം</td></tr>
-                <tr><td class="sl-no">26</td><td>അംഗം 26</td><td>അംഗം</td></tr>
-                <tr><td class="sl-no">27</td><td>അംഗം 27</td><td>അംഗം</td></tr>
+                <tr><td class="sl-no">1</td><td>മോനുട്ടി എം പൊയ്ലിശ്ശേരി</td></tr>
+                <tr><td class="sl-no">2</td><td>ശിഹാബ് വി</td></tr>
+                <tr><td class="sl-no">3</td><td>ഫസലുറഹ്മാൻ മാനു</td></tr>
+                <tr><td class="sl-no">4</td><td>അബ്ദുൽ വഹാബ് എം</td></tr>
+                <tr><td class="sl-no">5</td><td>അബ്ദുൽ സലീം യു വി</td></tr>
+                <tr><td class="sl-no">6</td><td>അബ്ദുറഹ്മാൻ ടി വി കെ</td></tr>
+                <tr><td class="sl-no">7</td><td>അബ്ദുൽ അസീസ് കെ പി</td></tr>
+                <tr><td class="sl-no">8</td><td>മുഹമ്മദ് ശാഫി മുണ്ടേക്കാട്ട്</td></tr>
+                <tr><td class="sl-no">9</td><td>മുഹമ്മദ് അജീർ പി</td></tr>
+                <tr><td class="sl-no">10</td><td>സി കെ നാസർ</td></tr>
+                <tr><td class="sl-no">11</td><td>സമീർ വളവത്ത്</td></tr>
+                <tr><td class="sl-no">12</td><td>എം ടി ഖാലിദ് ഹാജി</td></tr>
+                <tr><td class="sl-no">13</td><td>റഫീഖ് കെ</td></tr>
+                <tr><td class="sl-no">14</td><td>അബ്ദുൽ സലാം മാസ്റ്റർ</td></tr>
+                <tr><td class="sl-no">15</td><td>മൊയ്തീൻ പി കെ</td></tr>
+                <tr><td class="sl-no">16</td><td>ഹംസ വിവി മദീന</td></tr>
+                <tr><td class="sl-no">17</td><td>ഉമ്മർ എം</td></tr>
+                <tr><td class="sl-no">18</td><td>അബ്ദുൽ ഖാദർ ടി</td></tr>
+                <tr><td class="sl-no">19</td><td>മുഹമ്മദുണ്ണി കെ</td></tr>
+                <tr><td class="sl-no">20</td><td>അസ്ക്കറലി കെ</td></tr>
+                <tr><td class="sl-no">21</td><td>അലീൽ പെരുമാൾ</td></tr>
+                <tr><td class="sl-no">22</td><td>പി എ സലാം</td></tr>
+                <tr><td class="sl-no">23</td><td>ഒ നൗഷാദ്</td></tr>
+                <tr><td class="sl-no">24</td><td>ടി.എം. അബ്ദു</td></tr>
+                <tr><td class="sl-no">25</td><td>കെ പി സൈതലവി ഹാജി</td></tr>
+                <tr><td class="sl-no">26</td><td>ശറഫുദ്ദീൻ പി പി</td></tr>
+                <tr><td class="sl-no">27</td><td>മോനുട്ടി പുതുവീട്ടിൽ</td></tr>
             </tbody>
         </table>
 

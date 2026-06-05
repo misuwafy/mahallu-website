@@ -626,10 +626,8 @@
         const lessonDoc = await db.collection('courses').doc(courseId).collection('lessons').doc(lessonId).get();
         const lesson = lessonDoc.data();
 
-        // Set duration based on content type (seconds)
-        let durationSeconds = 30; // default for text
-        if (lesson.type === 'video') durationSeconds = 120; // 2 minutes minimum watch
-        if (lesson.type === 'pdf') durationSeconds = 60; // 1 minute for PDF
+        // Set duration based on admin-configured minutes (stored in lesson data)
+        let durationSeconds = (lesson.duration || 5) * 60; // convert minutes to seconds
 
         let contentHtml = '';
         if (lesson.type === 'video') {

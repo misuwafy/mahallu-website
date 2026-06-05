@@ -202,6 +202,20 @@
     background: #f8d7da;
 }
 
+.edit-btn {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.edit-btn:hover {
+    background: #cce5ff;
+}
+
 /* Admin Table */
 .admin-table {
     width: 100%;

@@ -197,6 +197,10 @@
                                 <option value="text">📝 Text Content</option>
                             </select>
                         </div>
+                        <div class="form-group" id="durationGroup">
+                            <label>Duration (minutes) — how long student must watch/read to proceed</label>
+                            <input type="number" id="lessonDuration" placeholder="e.g. 10" min="1" value="5" required>
+                        </div>
                         <div class="form-group" id="videoUrlGroup">
                             <label>YouTube Video URL</label>
                             <input type="url" id="lessonVideoUrl" placeholder="https://www.youtube.com/watch?v=...">
@@ -454,6 +458,7 @@
                         <strong>${d.title}</strong>
                         <small>${d.description} | ${d.duration} | ${d.totalClasses} classes</small>
                     </div>
+                    <button class="edit-btn" onclick="editCourse('${doc.id}')"><i class="fas fa-edit"></i></button>
                     <button class="delete-btn" onclick="deleteCourse('${doc.id}')"><i class="fas fa-trash"></i></button>
                 </div>
             `;
@@ -508,6 +513,7 @@
         const title = document.getElementById('lessonTitle').value;
         const type = document.getElementById('lessonType').value;
         const desc = document.getElementById('lessonDesc').value;
+        const duration = parseInt(document.getElementById('lessonDuration').value) || 5;
 
         let content = '';
         if (type === 'video') content = document.getElementById('lessonVideoUrl').value;
@@ -518,7 +524,7 @@
 
         try {
             await db.collection('courses').doc(courseId).collection('lessons').add({
-                order, title, type, content, description: desc,
+                order, title, type, content, description: desc, duration,
                 createdAt: firebase.firestore.FieldValue.serverTimestamp()
             });
             alert('Lesson added! ✅');
@@ -607,7 +613,8 @@
                 <div class="lesson-item">
                     <span class="lesson-order">${d.order}</span>
                     <span class="lesson-type-icon">${typeIcon}</span>
-                    <div class="lesson-info"><strong>${d.title}</strong><small>${d.description || ''}</small></div>
+                    <div class="lesson-info"><strong>${d.title}</strong><small>${d.description || ''} | ${d.duration || 5} min</small></div>
+                    <button class="edit-btn" onclick="editLesson('${courseId}', '${doc.id}')"><i class="fas fa-edit"></i></button>
                     <button class="delete-btn" onclick="deleteLesson('${courseId}', '${doc.id}')"><i class="fas fa-trash"></i></button>
                 </div>`;
         });
@@ -677,6 +684,51 @@
         if (!confirm('Delete this question?')) return;
         await db.collection('courses').doc(courseId).collection('quizzes').doc(quizId).delete();
         loadQuizzes(courseId);
+    }
+
+    // ============================================================
+    // EDIT FUNCTIONS
+    // ============================================================
+    async function editCourse(courseId) {
+        const doc = await db.collection('courses').doc(courseId).get();
+        const d = doc.data();
+
+        const newTitle = prompt('Course Title:', d.title);
+        if (!newTitle) return;
+        const newDesc = prompt('Description:', d.description);
+        const newDuration = prompt('Duration:', d.duration);
+        const newClasses = prompt('Total Classes:', d.totalClasses);
+
+        await db.collection('courses').doc(courseId).update({
+            title: newTitle,
+            description: newDesc || d.description,
+            duration: newDuration || d.duration,
+            totalClasses: parseInt(newClasses) || d.totalClasses
+        });
+        alert('Course updated! ✅');
+        loadCourses();
+    }
+
+    async function editLesson(courseId, lessonId) {
+        const doc = await db.collection('courses').doc(courseId).collection('lessons').doc(lessonId).get();
+        const d = doc.data();
+
+        const newTitle = prompt('Lesson Title:', d.title);
+        if (!newTitle) return;
+        const newOrder = prompt('Series Number:', d.order);
+        const newDuration = prompt('Duration (minutes):', d.duration || 5);
+        const newDesc = prompt('Description:', d.description || '');
+        const newContent = prompt('Content (URL or text):', d.content);
+
+        await db.collection('courses').doc(courseId).collection('lessons').doc(lessonId).update({
+            title: newTitle,
+            order: parseInt(newOrder) || d.order,
+            duration: parseInt(newDuration) || 5,
+            description: newDesc,
+            content: newContent || d.content
+        });
+        alert('Lesson updated! ✅');
+        loadLessons(courseId);
     }
     </script>
 </body>

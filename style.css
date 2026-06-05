@@ -745,6 +745,9 @@ img {
     box-shadow: var(--shadow);
     transition: var(--transition);
     border-top: 4px solid var(--primary);
+    text-decoration: none;
+    color: inherit;
+    display: block;
 }
 
 .edu-card:hover {

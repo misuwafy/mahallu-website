@@ -635,10 +635,15 @@
             contentHtml = videoId
                 ? `<div class="video-container"><iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe></div>`
                 : `<p>Video: <a href="${lesson.content}" target="_blank">${lesson.content}</a></p>`;
-        } else if (lesson.type === 'uploaded-video') {
-            contentHtml = `<div class="video-container-native"><video controls controlsList="nodownload" src="${lesson.content}"></video></div>`;
+        } else if (lesson.type === 'drive-video') {
+            const driveId = extractDriveId(lesson.content);
+            contentHtml = driveId
+                ? `<div class="video-container"><iframe src="https://drive.google.com/file/d/${driveId}/preview" frameborder="0" allowfullscreen></iframe></div>`
+                : `<p>Video: <a href="${lesson.content}" target="_blank">${lesson.content}</a></p>`;
         } else if (lesson.type === 'pdf' || lesson.type === 'uploaded-pdf') {
-            contentHtml = `<div class="pdf-container"><iframe src="${lesson.content}" frameborder="0"></iframe><p><a href="${lesson.content}" target="_blank"><i class="fas fa-external-link-alt"></i> PDF പുതിയ ടാബിൽ തുറക്കുക</a></p></div>`;
+            const pdfDriveId = extractDriveId(lesson.content);
+            const pdfSrc = pdfDriveId ? `https://drive.google.com/file/d/${pdfDriveId}/preview` : lesson.content;
+            contentHtml = `<div class="pdf-container"><iframe src="${pdfSrc}" frameborder="0"></iframe><p><a href="${lesson.content}" target="_blank"><i class="fas fa-external-link-alt"></i> PDF പുതിയ ടാബിൽ തുറക്കുക</a></p></div>`;
         } else {
             contentHtml = `<div class="text-content">${lesson.content.replace(/\n/g, '<br>')}</div>`;
         }
@@ -857,6 +862,11 @@
     // ============================================================
     function extractYouTubeId(url) {
         const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([^&\s?]+)/);
+        return match ? match[1] : null;
+    }
+
+    function extractDriveId(url) {
+        const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
         return match ? match[1] : null;
     }
     function getErrorMessage(code) {

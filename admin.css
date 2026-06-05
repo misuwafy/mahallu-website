@@ -304,3 +304,15 @@
     color: var(--primary);
     min-width: 45px;
 }
+
+/* Form Help Text */
+.form-help {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.78rem;
+    color: var(--primary);
+    background: #f0fff5;
+    padding: 8px 12px;
+    border-radius: var(--radius);
+    border-left: 3px solid var(--primary);
+}

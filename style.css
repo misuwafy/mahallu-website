@@ -767,6 +767,13 @@ img {
     color: var(--primary);
 }
 
+.edu-header-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    border-radius: 6px;
+}
+
 .edu-header h3 {
     font-size: 1rem;
     color: var(--dark);

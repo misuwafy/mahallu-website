@@ -904,6 +904,85 @@ img {
     color: var(--primary);
 }
 
+/* Coordinator Section */
+.coordinator-section {
+    margin: 30px 0;
+}
+
+.coordinator-card {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    background: linear-gradient(135deg, #f0fff5, #e8f8f0);
+    border: 2px solid var(--primary);
+    border-radius: var(--radius-lg);
+    padding: 25px 30px;
+    box-shadow: var(--shadow);
+    max-width: 550px;
+    margin: 0 auto;
+}
+
+.coordinator-photo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 3px solid var(--gold);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.coordinator-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.coordinator-info {
+    flex: 1;
+}
+
+.coordinator-badge {
+    display: inline-block;
+    background: var(--primary);
+    color: var(--white);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.coordinator-badge i {
+    margin-right: 5px;
+}
+
+.coordinator-info h3 {
+    font-size: 1.15rem;
+    color: var(--dark);
+    margin-bottom: 5px;
+}
+
+.coordinator-info p {
+    font-size: 0.85rem;
+    color: var(--gray);
+    margin-bottom: 5px;
+}
+
+.coordinator-phone {
+    color: var(--primary) !important;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .coordinator-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 25px 20px;
+    }
+}
+
 .member-card {
     background: var(--white);
     border-radius: var(--radius);

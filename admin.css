@@ -273,3 +273,34 @@
         padding: 8px 6px;
     }
 }
+
+/* Upload Progress */
+.upload-progress {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.upload-progress-bar {
+    flex: 1;
+    height: 8px;
+    background: var(--gray-light);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.upload-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(to right, var(--primary), var(--primary-light));
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+
+.upload-progress span {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--primary);
+    min-width: 45px;
+}

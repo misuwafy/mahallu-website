@@ -879,6 +879,31 @@ img {
     gap: 15px;
 }
 
+.members-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.member-section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    margin: 25px 0 15px;
+    padding: 10px 15px;
+    background: var(--light-bg);
+    border-radius: var(--radius);
+    border-left: 4px solid var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.member-section-title i {
+    color: var(--primary);
+}
+
 .member-card {
     background: var(--white);
     border-radius: var(--radius);
@@ -1394,6 +1419,10 @@ img {
     }
     
     .members-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .members-grid-4 {
         grid-template-columns: repeat(2, 1fr);
     }
     

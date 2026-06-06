@@ -149,23 +149,27 @@ img {
 
 .nav-menu {
     display: flex;
-    gap: 2px;
+    gap: 4px;
     flex-wrap: wrap;
     justify-content: center;
-    max-width: 700px;
+    max-width: 720px;
 }
 
 .nav-menu a {
-    padding: 8px 14px;
-    font-size: 0.85rem;
+    padding: 7px 14px;
+    font-size: 0.84rem;
     font-weight: 500;
     color: var(--text);
-    border-radius: 5px;
+    border-radius: 20px;
+    border: 1px solid var(--gray-light);
+    background: var(--white);
+    transition: var(--transition);
 }
 
 .nav-menu a:hover {
     background: var(--primary);
     color: var(--white);
+    border-color: var(--primary);
 }
 
 .nav-menu a.nav-highlight {

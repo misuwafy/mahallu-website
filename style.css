@@ -1554,21 +1554,38 @@ img {
     }
 
     .nav-menu {
-        display: flex;
+        display: none;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 3px;
-        padding: 10px 0 0;
+        gap: 5px;
+        padding: 15px;
         width: 100%;
+        background: var(--dark);
+        border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .nav-menu.active {
+        display: flex;
     }
     
     .nav-menu a {
-        padding: 6px 10px;
-        font-size: 0.75rem;
+        padding: 8px 14px;
+        font-size: 0.82rem;
+        color: rgba(255,255,255,0.85);
+        border-radius: 5px;
+    }
+
+    .nav-menu a:hover {
+        background: var(--primary);
+        color: var(--white);
     }
 
     .nav-toggle {
-        display: none;
+        display: block;
+    }
+
+    .header .container {
+        flex-wrap: wrap;
     }
 
     .header-reg-info {

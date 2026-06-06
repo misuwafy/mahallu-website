@@ -1817,3 +1817,27 @@ img {
     color: var(--primary);
     font-size: 1.1rem;
 }
+
+/* ===== VIDEOS SECTION ===== */
+.videos-grid {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.video-card {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+}
+
+.video-card iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius-lg);
+}

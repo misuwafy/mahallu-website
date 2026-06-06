@@ -650,6 +650,17 @@ img {
     color: var(--dark);
 }
 
+.person-phone {
+    font-size: 0.78rem;
+    color: var(--primary);
+    margin-top: 3px;
+    font-weight: 500;
+}
+
+.person-phone i {
+    margin-right: 4px;
+}
+
 .mosque-info-text h3 {
     color: var(--primary-dark);
     margin-bottom: 10px;

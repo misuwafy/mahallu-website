@@ -1889,6 +1889,7 @@ img {
     justify-content: center;
     z-index: 99999;
     transition: opacity 0.6s ease, visibility 0.6s ease;
+    padding: 20px;
 }
 
 .splash-screen.hidden {
@@ -1898,6 +1899,8 @@ img {
 
 .splash-content {
     text-align: center;
+    width: 100%;
+    max-width: 300px;
     animation: splashIn 1s ease forwards;
 }
 
@@ -1910,6 +1913,8 @@ img {
     padding: 10px;
     animation: logoSpin 1.5s ease forwards;
     box-shadow: 0 0 40px rgba(201, 168, 76, 0.3);
+    display: block;
+    margin: 0 auto;
 }
 
 .splash-title {
@@ -1926,6 +1931,19 @@ img {
     margin-top: 8px;
     opacity: 0;
     animation: fadeUp 0.8s ease 0.8s forwards;
+}
+
+@media (max-width: 768px) {
+    .splash-logo {
+        width: 100px;
+        height: 100px;
+    }
+    .splash-title {
+        font-size: 1.4rem;
+    }
+    .splash-sub {
+        font-size: 0.9rem;
+    }
 }
 
 @keyframes logoSpin {

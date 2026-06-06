@@ -178,6 +178,29 @@ img {
     cursor: pointer;
 }
 
+/* Header Registration Info */
+.header-reg-info {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.header-reg-info span {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.6);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 4px;
+}
+
+.header-reg-info span i {
+    color: var(--gold);
+    font-size: 0.65rem;
+}
+
 /* ===== FLASH NEWS ===== */
 .flash-news {
     background: var(--primary-dark);
@@ -1516,6 +1539,10 @@ img {
 
 @media (max-width: 768px) {
     .top-bar-left {
+        display: none;
+    }
+
+    .header-reg-info {
         display: none;
     }
     

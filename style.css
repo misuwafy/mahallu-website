@@ -119,12 +119,14 @@ img {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .logo {
     display: flex;
     align-items: center;
     gap: 12px;
+    flex-shrink: 0;
 }
 
 .logo-img {
@@ -136,16 +138,20 @@ img {
     font-size: 1.3rem;
     color: var(--primary-dark);
     line-height: 1.2;
+    white-space: nowrap;
 }
 
 .logo-text span {
     font-size: 0.75rem;
     color: var(--gray);
+    white-space: nowrap;
 }
 
 .nav-menu {
     display: flex;
     gap: 2px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
 }
 
 .nav-menu a {

@@ -1,3 +1,11 @@
+// ===== SPLASH SCREEN =====
+const splashScreen = document.getElementById('splashScreen');
+if (splashScreen) {
+    setTimeout(() => {
+        splashScreen.classList.add('hidden');
+    }, 2500);
+}
+
 // ===== SLIDER =====
 const slides = document.querySelectorAll('.slide');
 const dotsContainer = document.getElementById('sliderDots');

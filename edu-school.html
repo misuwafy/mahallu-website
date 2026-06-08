@@ -6,6 +6,7 @@
     <title>ഖാദിമുൽ ഇസ്ലാം ഇംഗ്ലീഷ് മീഡിയം സ്കൂൾ | BP അങ്ങാടി</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="edu-page.css">
+    <link rel="icon" type="image/png" href="favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -24,6 +25,10 @@
             <div class="edu-page-icon"><img src="school.jpg" alt="School" style="height:50px; border-radius:8px;"></div>
             <h2>ഖാദിമുൽ ഇസ്ലാം ഇംഗ്ലീഷ് മീഡിയം സ്കൂൾ</h2>
             <span class="edu-page-type">മത ഭൗതിക സമന്വയ വിദ്യാഭ്യാസം</span>
+            <div class="edu-slideshow" style="margin-top:20px; position:relative; border-radius:10px; overflow:hidden; height:250px;">
+                <img class="edu-slide active" src="school-building1.jpeg" style="width:100%; height:250px; object-fit:cover; position:absolute; top:0; left:0; opacity:1; transition: opacity 0.8s ease;">
+                <img class="edu-slide" src="school-building2.jpeg" style="width:100%; height:250px; object-fit:cover; position:absolute; top:0; left:0; opacity:0; transition: opacity 0.8s ease;">
+            </div>
         </div>
 
         <div class="edu-page-stats">
@@ -33,24 +38,80 @@
             <div class="edu-stat"><i class="fas fa-clock"></i><strong>10:00 AM - 4:00 PM</strong><span>സമയം</span></div>
         </div>
 
+        <!-- Head -->
         <div class="edu-page-section">
             <h3><i class="fas fa-user-tie"></i> ഹെഡ്മിസ്ട്രസ്</h3>
-            <p>ഖദീജ ടീച്ചർ</p>
+            <div style="display: flex; align-items: center; gap: 15px; padding: 15px; background: #f0fff5; border-radius: 10px; border: 2px solid #0d6e3f; max-width:400px;">
+                <div style="width:70px; height:70px; border-radius:50%; overflow:hidden; border:3px solid #0d6e3f; flex-shrink:0; background:#e9ecef; display:flex; align-items:center; justify-content:center;">
+                    <img src="school-head.jpeg" alt="ഹെഡ്മിസ്ട്രസ്" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-user\' style=\'font-size:1.5rem; color:#0d6e3f;\'></i>';">
+                </div>
+                <div>
+                    <span style="display:inline-block; background:#0d6e3f; color:white; padding:2px 10px; border-radius:12px; font-size:0.7rem; font-weight:600; margin-bottom:5px;">ഹെഡ്മിസ്ട്രസ്</span>
+                    <h4 style="font-size:0.95rem; color:#1a1a2e; margin:4px 0;">ഖദീജ ടീച്ചർ</h4>
+                    <p style="font-size:0.8rem; color:#0d6e3f; font-weight:500;"><i class="fas fa-phone"></i> 0000000000</p>
+                </div>
+            </div>
         </div>
 
         <div class="edu-page-section">
             <h3><i class="fas fa-info-circle"></i> വിശദാംശങ്ങൾ</h3>
-            <!-- ✏️ ഇവിടെ സ്കൂളിന്റെ വിശദമായ വിവരങ്ങൾ ചേർക്കുക -->
             <p>ഖാദിമുൽ ഇസ്ലാം ഇംഗ്ലീഷ് മീഡിയം സ്കൂൾ മത-ഭൗതിക സമന്വയ വിദ്യാഭ്യാസം 
             നൽകുന്ന സ്ഥാപനമാണ്. LKG മുതൽ 4-ാം ക്ലാസ് വരെയുള്ള കുട്ടികൾക്ക് ഇംഗ്ലീഷ് 
-            മീഡിയത്തിൽ പഠനം നടത്താം.</p>
+            മീഡിയത്തിൽ മികച്ച പഠന അന്തരീക്ഷം നൽകുന്നു.</p>
         </div>
 
+        <!-- പഠന പ്രവർത്തനങ്ങൾ -->
+        <div class="edu-page-section" style="background: linear-gradient(135deg, #f0fff5, #e8f8f0); border: 2px solid #0d6e3f;">
+            <h3><i class="fas fa-book-reader"></i> പഠന പ്രവർത്തനങ്ങൾ</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                <div style="display: flex; align-items: center; gap: 10px; padding: 12px 15px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); font-size: 0.92rem;"><i class="fas fa-file-alt" style="color: #0d6e3f;"></i> യൂണിറ്റ് ടെസ്റ്റുകൾ</div>
+                <div style="display: flex; align-items: center; gap: 10px; padding: 12px 15px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); font-size: 0.92rem;"><i class="fas fa-pen-fancy" style="color: #0d6e3f;"></i> ടേം പരീക്ഷകൾ</div>
+                <div style="display: flex; align-items: center; gap: 10px; padding: 12px 15px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); font-size: 0.92rem;"><i class="fas fa-laptop" style="color: #0d6e3f;"></i> സ്മാർട്ട് ക്ലാസ് റൂം</div>
+                <div style="display: flex; align-items: center; gap: 10px; padding: 12px 15px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); font-size: 0.92rem;"><i class="fas fa-book-quran" style="color: #0d6e3f;"></i> മത പഠനം</div>
+            </div>
+        </div>
+
+        <!-- പാഠ്യേതര പ്രവർത്തനങ്ങൾ -->
+        <div class="edu-page-section" style="background: linear-gradient(135deg, #fff8f0, #fef3e8); border: 2px solid #c9a84c;">
+            <h3><i class="fas fa-star"></i> പാഠ്യേതര പ്രവർത്തനങ്ങൾ</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                <div style="display: flex; align-items: center; gap: 10px; padding: 12px 15px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); font-size: 0.92rem;"><i class="fas fa-calendar-day" style="color: #c9a84c;"></i> ദിനാചരണങ്ങൾ</div>
+                <div style="display: flex; align-items: center; gap: 10px; padding: 12px 15px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); font-size: 0.92rem;"><i class="fas fa-palette" style="color: #c9a84c;"></i> കലാ പരിപാടികൾ</div>
+                <div style="display: flex; align-items: center; gap: 10px; padding: 12px 15px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); font-size: 0.92rem;"><i class="fas fa-running" style="color: #c9a84c;"></i> കായിക മത്സരങ്ങൾ</div>
+                <div style="display: flex; align-items: center; gap: 10px; padding: 12px 15px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); font-size: 0.92rem;"><i class="fas fa-bus" style="color: #c9a84c;"></i> പഠനയാത്രകൾ</div>
+                <div style="display: flex; align-items: center; gap: 10px; padding: 12px 15px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); font-size: 0.92rem;"><i class="fas fa-trophy" style="color: #c9a84c;"></i> വാർഷികം</div>
+                <div style="display: flex; align-items: center; gap: 10px; padding: 12px 15px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); font-size: 0.92rem;"><i class="fas fa-book" style="color: #c9a84c;"></i> ലൈബ്രറി</div>
+            </div>
+        </div>
+
+        <!-- Staff Table -->
+        <div class="edu-page-section">
+            <h3><i class="fas fa-chalkboard-teacher"></i> അധ്യാപക വിവരങ്ങൾ</h3>
+            <div style="overflow-x: auto;">
+                <table style="width:100%; border-collapse:collapse; font-size:0.85rem;">
+                    <thead>
+                        <tr style="background: #0d6e3f; color: white;">
+                            <th style="padding:10px 12px; text-align:center;">No</th>
+                            <th style="padding:10px 12px; text-align:left;">പേര്</th>
+                            <th style="padding:10px 12px; text-align:center;">ക്ലാസ്സ്</th>
+                            <th style="padding:10px 12px; text-align:center;">ഫോൺ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- ✏️ അധ്യാപക വിവരങ്ങൾ ചേർക്കുക -->
+                        <tr style="border-bottom:1px solid #e9ecef;"><td style="padding:10px 12px; text-align:center; font-weight:600; color:#0d6e3f;">1</td><td style="padding:10px 12px;">അധ്യാപകൻ 1</td><td style="padding:10px 12px; text-align:center;">LKG</td><td style="padding:10px 12px; text-align:center;">0000000000</td></tr>
+                        <tr style="border-bottom:1px solid #e9ecef; background:#f8f9fa;"><td style="padding:10px 12px; text-align:center; font-weight:600; color:#0d6e3f;">2</td><td style="padding:10px 12px;">അധ്യാപകൻ 2</td><td style="padding:10px 12px; text-align:center;">UKG</td><td style="padding:10px 12px; text-align:center;">0000000000</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Gallery -->
         <div class="edu-page-section">
             <h3><i class="fas fa-image"></i> ഫോട്ടോ ഗാലറി</h3>
             <div class="edu-gallery">
-                <div class="edu-gallery-placeholder"><i class="fas fa-camera"></i><p>ഫോട്ടോ ചേർക്കുക</p></div>
-                <div class="edu-gallery-placeholder"><i class="fas fa-camera"></i><p>ഫോട്ടോ ചേർക്കുക</p></div>
+                <!-- ✏️ Save photos as: school-1.jpeg, school-2.jpeg, etc. -->
+                <div class="edu-gallery-placeholder"><i class="fas fa-camera"></i><p>ഫോട്ടോകൾ ഉടൻ ചേർക്കും</p></div>
             </div>
         </div>
 
@@ -58,5 +119,17 @@
             <a href="index.html#education" class="btn-outline"><i class="fas fa-arrow-left"></i> വിദ്യാഭ്യാസ വിഭാഗം</a>
         </div>
     </div>
+
+    <script>
+        const slides = document.querySelectorAll('.edu-slide');
+        let current = 0;
+        if (slides.length > 1) {
+            setInterval(() => {
+                slides[current].style.opacity = '0';
+                current = (current + 1) % slides.length;
+                slides[current].style.opacity = '1';
+            }, 3000);
+        }
+    </script>
 </body>
 </html>

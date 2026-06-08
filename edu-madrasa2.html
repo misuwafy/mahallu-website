@@ -6,6 +6,7 @@
     <title>മദ്രസത്തുൽ അഥ്ഫാൽ | ഖാദിമുൽ ഇസ്ലാം സഭ BP അങ്ങാടി</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="edu-page.css">
+    <link rel="icon" type="image/png" href="favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -24,6 +25,10 @@
             <div class="edu-page-icon"><img src="madrasa.jpg" alt="Madrasa" style="height:50px; border-radius:8px;"></div>
             <h2>മദ്രസത്തുൽ അഥ്ഫാൽ, പൂഴിംകുന്ന്</h2>
             <span class="edu-page-type">മതവിദ്യാഭ്യാസം</span>
+            <div class="edu-slideshow" style="margin-top:20px; position:relative; border-radius:10px; overflow:hidden; height:250px;">
+                <img class="edu-slide active" src="madrasa2-building1.jpeg" style="width:100%; height:250px; object-fit:cover; position:absolute; top:0; left:0; opacity:1; transition: opacity 0.8s ease;">
+                <img class="edu-slide" src="madrasa2-building2.jpeg" style="width:100%; height:250px; object-fit:cover; position:absolute; top:0; left:0; opacity:0; transition: opacity 0.8s ease;">
+            </div>
         </div>
 
         <div class="edu-page-stats">
@@ -33,23 +38,85 @@
             <div class="edu-stat"><i class="fas fa-clock"></i><strong>6:30 - 8:30 AM</strong><span>സമയം</span></div>
         </div>
 
+        <!-- Sadr Muallim -->
         <div class="edu-page-section">
             <h3><i class="fas fa-user-tie"></i> സ്വദ്ർ മുഅല്ലിം</h3>
-            <p>കെ സി മുഹമ്മദ് മുസ്ലിയാർ</p>
+            <div style="display: flex; align-items: center; gap: 15px; padding: 15px; background: #f0fff5; border-radius: 10px; border: 2px solid #0d6e3f; max-width:400px;">
+                <div style="width:70px; height:70px; border-radius:50%; overflow:hidden; border:3px solid #0d6e3f; flex-shrink:0; background:#e9ecef; display:flex; align-items:center; justify-content:center;">
+                    <img src="madrasa2-sadr.jpeg" alt="സ്വദ്ർ മുഅല്ലിം" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-user\' style=\'font-size:1.5rem; color:#0d6e3f;\'></i>';">
+                </div>
+                <div>
+                    <span style="display:inline-block; background:#0d6e3f; color:white; padding:2px 10px; border-radius:12px; font-size:0.7rem; font-weight:600; margin-bottom:5px;">സ്വദ്ർ മുഅല്ലിം</span>
+                    <h4 style="font-size:0.95rem; color:#1a1a2e; margin:4px 0;">കെ സി മുഹമ്മദ് മുസ്ലിയാർ</h4>
+                    <p style="font-size:0.8rem; color:#0d6e3f; font-weight:500;"><i class="fas fa-phone"></i> 0000000000</p>
+                </div>
+            </div>
         </div>
 
         <div class="edu-page-section">
             <h3><i class="fas fa-info-circle"></i> വിശദാംശങ്ങൾ</h3>
-            <!-- ✏️ ഇവിടെ മദ്രസയുടെ വിശദമായ വിവരങ്ങൾ ചേർക്കുക -->
             <p>മദ്രസത്തുൽ അഥ്ഫാൽ പൂഴിംകുന്ന് BP അങ്ങാടി മഹല്ലിലെ മത വിദ്യാഭ്യാസ സ്ഥാപനമാണ്. 
             ക്ലാസ് 1 മുതൽ 8 വരെയുള്ള വിദ്യാർത്ഥികൾക്ക് മത വിദ്യാഭ്യാസം നൽകുന്നു.</p>
         </div>
 
+        <!-- പഠന പ്രവർത്തനങ്ങൾ -->
+        <div class="edu-page-section" style="background: linear-gradient(135deg, #f0fff5, #e8f8f0); border: 2px solid #0d6e3f;">
+            <h3><i class="fas fa-book-reader"></i> പഠന പ്രവർത്തനങ്ങൾ</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                <div style="display: flex; align-items: center; gap: 10px; padding: 12px 15px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); font-size: 0.92rem;">
+                    <i class="fas fa-file-alt" style="color: #0d6e3f; font-size: 1.1rem;"></i> മാസം തോറുമുള്ള പരീക്ഷകൾ
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; padding: 12px 15px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); font-size: 0.92rem;">
+                    <i class="fas fa-pen-fancy" style="color: #0d6e3f; font-size: 1.1rem;"></i> മോഡൽ പരീക്ഷകൾ
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; padding: 12px 15px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); font-size: 0.92rem;">
+                    <i class="fas fa-hands" style="color: #0d6e3f; font-size: 1.1rem;"></i> പ്രാക്ടിക്കൽ പരിശീലനങ്ങൾ
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; padding: 12px 15px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); font-size: 0.92rem;">
+                    <i class="fas fa-laptop" style="color: #0d6e3f; font-size: 1.1rem;"></i> ഡിജിറ്റൽ ക്ലാസ് റൂം
+                </div>
+            </div>
+        </div>
+
+        <!-- പാഠ്യേതര പ്രവർത്തനങ്ങൾ -->
+        <div class="edu-page-section" style="background: linear-gradient(135deg, #fff8f0, #fef3e8); border: 2px solid #c9a84c;">
+            <h3><i class="fas fa-star"></i> പാഠ്യേതര പ്രവർത്തനങ്ങൾ</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                <div style="display: flex; align-items: center; gap: 10px; padding: 12px 15px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); font-size: 0.92rem;"><i class="fas fa-calendar-day" style="color: #c9a84c;"></i> ദിനാചരണങ്ങൾ</div>
+                <div style="display: flex; align-items: center; gap: 10px; padding: 12px 15px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); font-size: 0.92rem;"><i class="fas fa-feather-alt" style="color: #c9a84c;"></i> സാഹിത്യ സമാജം</div>
+                <div style="display: flex; align-items: center; gap: 10px; padding: 12px 15px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); font-size: 0.92rem;"><i class="fas fa-bus" style="color: #c9a84c;"></i> പഠനയാത്രകൾ</div>
+                <div style="display: flex; align-items: center; gap: 10px; padding: 12px 15px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); font-size: 0.92rem;"><i class="fas fa-lightbulb" style="color: #c9a84c;"></i> മോട്ടിവേഷൻ ക്ലാസുകൾ</div>
+            </div>
+        </div>
+
+        <!-- Staff Table -->
+        <div class="edu-page-section">
+            <h3><i class="fas fa-chalkboard-teacher"></i> അധ്യാപക വിവരങ്ങൾ</h3>
+            <div style="overflow-x: auto;">
+                <table style="width:100%; border-collapse:collapse; font-size:0.85rem;">
+                    <thead>
+                        <tr style="background: #0d6e3f; color: white;">
+                            <th style="padding:10px 12px; text-align:center;">No</th>
+                            <th style="padding:10px 12px; text-align:left;">പേരും സ്ഥലവും</th>
+                            <th style="padding:10px 12px; text-align:center;">ക്ലാസ്സ്</th>
+                            <th style="padding:10px 12px; text-align:center;">ഫോൺ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- ✏️ അധ്യാപക വിവരങ്ങൾ ചേർക്കുക -->
+                        <tr style="border-bottom:1px solid #e9ecef;"><td style="padding:10px 12px; text-align:center; font-weight:600; color:#0d6e3f;">1</td><td style="padding:10px 12px;">അധ്യാപകൻ 1</td><td style="padding:10px 12px; text-align:center;">1</td><td style="padding:10px 12px; text-align:center;">0000000000</td></tr>
+                        <tr style="border-bottom:1px solid #e9ecef; background:#f8f9fa;"><td style="padding:10px 12px; text-align:center; font-weight:600; color:#0d6e3f;">2</td><td style="padding:10px 12px;">അധ്യാപകൻ 2</td><td style="padding:10px 12px; text-align:center;">2</td><td style="padding:10px 12px; text-align:center;">0000000000</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Gallery -->
         <div class="edu-page-section">
             <h3><i class="fas fa-image"></i> ഫോട്ടോ ഗാലറി</h3>
             <div class="edu-gallery">
-                <div class="edu-gallery-placeholder"><i class="fas fa-camera"></i><p>ഫോട്ടോ ചേർക്കുക</p></div>
-                <div class="edu-gallery-placeholder"><i class="fas fa-camera"></i><p>ഫോട്ടോ ചേർക്കുക</p></div>
+                <!-- ✏️ Save photos as: madrasa2-1.jpeg, madrasa2-2.jpeg, etc. -->
+                <div class="edu-gallery-placeholder"><i class="fas fa-camera"></i><p>ഫോട്ടോകൾ ഉടൻ ചേർക്കും</p></div>
             </div>
         </div>
 
@@ -57,5 +124,17 @@
             <a href="index.html#education" class="btn-outline"><i class="fas fa-arrow-left"></i> വിദ്യാഭ്യാസ വിഭാഗം</a>
         </div>
     </div>
+
+    <script>
+        const slides = document.querySelectorAll('.edu-slide');
+        let current = 0;
+        if (slides.length > 1) {
+            setInterval(() => {
+                slides[current].style.opacity = '0';
+                current = (current + 1) % slides.length;
+                slides[current].style.opacity = '1';
+            }, 3000);
+        }
+    </script>
 </body>
 </html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ഗാലറി | ഖാദിമുൽ ഇസ്ലാം സഭ BP അങ്ങാടി</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        .gallery-page-header {
+            background: linear-gradient(135deg, var(--dark), var(--primary-dark));
+            padding: 60px 20px; text-align: center; color: var(--white);
+        }
+        .gallery-page-header h1 { font-size: 2.2rem; margin-bottom: 10px; }
+        .gallery-page-header p { opacity: 0.7; }
+        .gallery-body { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+        .back-link { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 25px; color: var(--primary); font-weight: 600; }
+        .back-link:hover { text-decoration: underline; }
+
+        /* Tabs */
+        .gallery-tabs {
+            display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 30px;
+            justify-content: center;
+        }
+        .gallery-tab {
+            padding: 10px 20px; border: 2px solid var(--gray-light);
+            border-radius: 50px; font-size: 0.88rem; font-weight: 600;
+            cursor: pointer; transition: all 0.3s ease; background: var(--white);
+            font-family: inherit; color: var(--text);
+        }
+        .gallery-tab:hover { border-color: var(--primary); color: var(--primary); }
+        .gallery-tab.active { background: var(--primary); color: var(--white); border-color: var(--primary); }
+
+        /* Gallery Grid */
+        .gallery-content { display: none; }
+        .gallery-content.active { display: block; }
+        .gallery-photos {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;
+        }
+        .gallery-photos img {
+            width: 100%; height: 220px; object-fit: cover;
+            border-radius: 10px; cursor: pointer; transition: transform 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        .gallery-photos img:hover { transform: scale(1.03); box-shadow: 0 5px 20px rgba(0,0,0,0.15); }
+
+        /* Lightbox */
+        .lightbox {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); z-index: 99999; align-items: center; justify-content: center; padding: 20px;
+        }
+        .lightbox.active { display: flex; }
+        .lightbox img { max-width: 90%; max-height: 85vh; border-radius: 10px; }
+        .lightbox-close { position: absolute; top: 20px; right: 30px; color: white; font-size: 2rem; cursor: pointer; }
+
+        .empty-gallery { text-align: center; padding: 60px 20px; color: var(--gray); }
+        .empty-gallery i { font-size: 3rem; margin-bottom: 15px; display: block; opacity: 0.4; }
+
+        @media (max-width: 768px) {
+            .gallery-photos { grid-template-columns: repeat(2, 1fr); }
+            .gallery-photos img { height: 150px; }
+        }
+        @media (max-width: 480px) {
+            .gallery-photos { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery-page-header">
+        <img src="logo.jpg" alt="Logo" style="height:60px; margin-bottom:15px;">
+        <h1>ഫോട്ടോ ഗാലറി</h1>
+        <p>ഖാദിമുൽ ഇസ്ലാം സഭ BP അങ്ങാടി</p>
+    </div>
+
+    <div class="gallery-body">
+        <a href="index.html#gallery" class="back-link"><i class="fas fa-arrow-left"></i> ഹോം പേജിലേക്ക്</a>
+
+        <!-- Tabs -->
+        <div class="gallery-tabs">
+            <button class="gallery-tab active" data-tab="all">എല്ലാം</button>
+            <button class="gallery-tab" data-tab="madrasa1">മദ്രസ 1</button>
+            <button class="gallery-tab" data-tab="madrasa2">മദ്രസ 2</button>
+            <button class="gallery-tab" data-tab="school">സ്കൂൾ</button>
+            <button class="gallery-tab" data-tab="general">ജനറൽ</button>
+        </div>
+
+        <!-- All Photos -->
+        <div class="gallery-content active" id="tab-all">
+            <div class="gallery-photos">
+                <img src="mosque-new.jpeg" alt="മസ്ജിദ്">
+                <img src="mosque-old.jpeg" alt="മസ്ജിദ്">
+                <img src="madrasa1-1.jpeg" alt="മദ്രസ">
+                <img src="madrasa1-2.jpeg" alt="മദ്രസ">
+                <img src="madrasa1-3.jpeg" alt="മദ്രസ">
+                <img src="madrasa1-4.jpeg" alt="മദ്രസ">
+                <img src="madrasa1-5.jpeg" alt="മദ്രസ">
+                <img src="madrasa1-6.jpeg" alt="മദ്രസ">
+                <img src="madrasa1-10.jpeg" alt="മദ്രസ">
+                <img src="madrasa1-15.jpeg" alt="മദ്രസ">
+                <img src="madrasa1-20.jpeg" alt="മദ്രസ">
+                <img src="madrasa1-25.jpeg" alt="മദ്രസ">
+            </div>
+        </div>
+
+        <!-- Madrasa 1 -->
+        <div class="gallery-content" id="tab-madrasa1">
+            <div class="gallery-photos">
+                <img src="madrasa1-1.jpeg" alt="മദ്രസ 1">
+                <img src="madrasa1-2.jpeg" alt="മദ്രസ 1">
+                <img src="madrasa1-3.jpeg" alt="മദ്രസ 1">
+                <img src="madrasa1-4.jpeg" alt="മദ്രസ 1">
+                <img src="madrasa1-5.jpeg" alt="മദ്രസ 1">
+                <img src="madrasa1-6.jpeg" alt="മദ്രസ 1">
+                <img src="madrasa1-7.jpeg" alt="മദ്രസ 1">
+                <img src="madrasa1-8.jpeg" alt="മദ്രസ 1">
+                <img src="madrasa1-9.jpeg" alt="മദ്രസ 1">
+                <img src="madrasa1-10.jpeg" alt="മദ്രസ 1">
+                <img src="madrasa1-11.jpeg" alt="മദ്രസ 1">
+                <img src="madrasa1-12.jpeg" alt="മദ്രസ 1">
+                <img src="madrasa1-13.jpeg" alt="മദ്രസ 1">
+                <img src="madrasa1-14.jpeg" alt="മദ്രസ 1">
+                <img src="madrasa1-15.jpeg" alt="മദ്രസ 1">
+                <img src="madrasa1-16.jpeg" alt="മദ്രസ 1">
+                <img src="madrasa1-17.jpeg" alt="മദ്രസ 1">
+                <img src="madrasa1-18.jpeg" alt="മദ്രസ 1">
+                <img src="madrasa1-19.jpeg" alt="മദ്രസ 1">
+                <img src="madrasa1-20.jpeg" alt="മദ്രസ 1">
+                <img src="madrasa1-21.jpeg" alt="മദ്രസ 1">
+                <img src="madrasa1-22.jpeg" alt="മദ്രസ 1">
+                <img src="madrasa1-23.jpeg" alt="മദ്രസ 1">
+                <img src="madrasa1-24.jpeg" alt="മദ്രസ 1">
+                <img src="madrasa1-25.jpeg" alt="മദ്രസ 1">
+                <img src="madrasa1-26.jpeg" alt="മദ്രസ 1">
+                <img src="madrasa1-27.jpeg" alt="മദ്രസ 1">
+                <img src="madrasa1-28.jpeg" alt="മദ്രസ 1">
+                <img src="madrasa1-29.jpeg" alt="മദ്രസ 1">
+                <img src="madrasa1-30.jpeg" alt="മദ്രസ 1">
+            </div>
+        </div>
+
+        <!-- Madrasa 2 -->
+        <div class="gallery-content" id="tab-madrasa2">
+            <div class="gallery-photos">
+                <!-- ✏️ Save madrasa2 photos as: madrasa2-1.jpeg, madrasa2-2.jpeg, etc. -->
+                <div class="empty-gallery"><i class="fas fa-camera"></i><p>ഫോട്ടോകൾ ഉടൻ ചേർക്കും</p></div>
+            </div>
+        </div>
+
+        <!-- School -->
+        <div class="gallery-content" id="tab-school">
+            <div class="gallery-photos">
+                <!-- ✏️ Save school photos as: school-1.jpeg, school-2.jpeg, etc. -->
+                <div class="empty-gallery"><i class="fas fa-camera"></i><p>ഫോട്ടോകൾ ഉടൻ ചേർക്കും</p></div>
+            </div>
+        </div>
+
+        <!-- General -->
+        <div class="gallery-content" id="tab-general">
+            <div class="gallery-photos">
+                <img src="mosque-new.jpeg" alt="മസ്ജിദ്">
+                <img src="mosque-old.jpeg" alt="മസ്ജിദ്">
+                <!-- ✏️ Save general photos as: general-1.jpeg, general-2.jpeg, etc. -->
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" id="lightboxClose"><i class="fas fa-times"></i></span>
+        <img id="lightboxImg" src="" alt="">
+    </div>
+
+    <script>
+        // Tab switching
+        document.querySelectorAll('.gallery-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.gallery-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.gallery-content').forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+            });
+        });
+
+        // Lightbox
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+
+        document.querySelectorAll('.gallery-photos img').forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightbox.classList.add('active');
+            });
+        });
+
+        document.getElementById('lightboxClose').addEventListener('click', () => {
+            lightbox.classList.remove('active');
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) lightbox.classList.remove('active');
+        });
+    </script>
+</body>
+</html>

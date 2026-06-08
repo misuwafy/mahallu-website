@@ -123,15 +123,21 @@
 /* Gallery */
 .edu-gallery {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 15px;
 }
 
 .edu-gallery img {
     width: 100%;
-    height: 180px;
+    height: 200px;
     object-fit: cover;
     border-radius: var(--radius);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.edu-gallery img:hover {
+    transform: scale(1.03);
 }
 
 .edu-gallery-placeholder {

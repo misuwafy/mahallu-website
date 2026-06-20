@@ -1976,3 +1976,80 @@ img {
     0% { opacity: 0; }
     100% { opacity: 1; }
 }
+
+
+/* ===== SynaptaLogic Branding Footer ===== */
+.sl-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #2E1B65;
+    border-top: 1px solid rgba(59,130,246,0.15);
+    z-index: 9999;
+}
+.sl-footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 24px;
+}
+.sl-footer-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.sl-footer-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    color: rgba(255,255,255,0.45);
+}
+.sl-footer-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    background: rgba(59,130,246,0.1);
+    border: 1px solid rgba(59,130,246,0.25);
+    border-radius: 20px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+.sl-footer-badge strong {
+    color: #fff;
+    font-weight: 600;
+}
+.sl-footer-logo {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+}
+.sl-footer-badge:hover {
+    background: rgba(59,130,246,0.2);
+    border-color: rgba(59,130,246,0.4);
+    color: #fff;
+}
+.sl-footer-badge svg:last-child {
+    opacity: 0.6;
+    color: #3B82F6;
+}
+.sl-footer-badge:hover svg:last-child {
+    opacity: 1;
+}
+.sl-footer-right {
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+}
+body {
+    padding-bottom: 44px;
+}
+@media (max-width: 768px) {
+    .sl-footer-right { display: none; }
+    .sl-footer-label { display: none; }
+}
+@media print {
+    .sl-footer { display: none !important; }
+}

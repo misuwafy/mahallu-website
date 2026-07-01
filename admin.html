@@ -358,7 +358,7 @@
     const auth = firebase.auth();
     const db = firebase.firestore();
 
-    const ADMIN_EMAIL = "kisbpa@gmail.com";
+    const ADMIN_EMAILS = ["kisbpa@gmail.com", "misuwafy@gmail.com"];
 
     // Store loaded courses
     let allCourses = {};
@@ -375,7 +375,7 @@
 
         try {
             const cred = await auth.signInWithEmailAndPassword(email, password);
-            if (cred.user.email !== ADMIN_EMAIL) {
+            if (!ADMIN_EMAILS.includes(cred.user.email)) {
                 errorEl.textContent = 'You are not authorized as admin!';
                 errorEl.style.display = 'block';
                 auth.signOut();
@@ -389,7 +389,7 @@
     });
 
     auth.onAuthStateChanged((user) => {
-        if (user && user.email === ADMIN_EMAIL) {
+        if (user && ADMIN_EMAILS.includes(user.email)) {
             showAdminDashboard();
         }
     });
